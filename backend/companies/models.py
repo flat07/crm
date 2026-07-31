@@ -1,3 +1,4 @@
+# backend/companies/models.py
 from __future__ import annotations
 
 from common.models import BaseModel
