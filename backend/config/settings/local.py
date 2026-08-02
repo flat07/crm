@@ -19,7 +19,7 @@ ROOT_DIR = Path(__file__).resolve().parent.parent.parent.parent
 ENV_PATH = ROOT_DIR / ".env"
 load_dotenv(dotenv_path=ENV_PATH)
 
-DEBUG = os.environ.get("DJANGO_DEBUG", "False").lower() in ("true", "1", "t")
+DEBUG = True
 ALLOWED_HOSTS = os.environ.get("DJANGO_ALLOWED_HOSTS", "").split(",")
 # CSRF_COOKIE_DOMAIN = ".lvh.me"
 # SESSION_COOKIE_DOMAIN = ".lvh.me"

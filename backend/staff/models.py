@@ -64,7 +64,6 @@ class Role(BaseModel):
 
     permissions = models.ManyToManyField(
         Permission,
-        through="RolePermission",
         related_name="roles",
     )
 
@@ -91,7 +90,7 @@ class User(AbstractBaseUser, PermissionsMixin, BaseModel):
     )
 
     phone = models.CharField(
-        max_length=20,
+        max_length=40,
         blank=True,
     )
 
@@ -116,7 +115,6 @@ class User(AbstractBaseUser, PermissionsMixin, BaseModel):
 
     roles = models.ManyToManyField(
         Role,
-        through="UserRole",
         related_name="users",
     )
 
@@ -155,55 +153,7 @@ class User(AbstractBaseUser, PermissionsMixin, BaseModel):
 
         return self.roles.filter(name=role_name).exists()
 
-    def has_permission(
-        self,
-        permission_code: str,
-    ):
-
-        return self.roles.filter(permissions__code=permission_code).exists()
-
-
-class RolePermission(BaseModel):
-    role = models.ForeignKey(
-        Role,
-        on_delete=models.CASCADE,
-        related_name="role_permissions",
-    )
-
-    permission = models.ForeignKey(
-        Permission,
-        on_delete=models.CASCADE,
-        related_name="permission_roles",
-    )
-
-    class Meta:
-        unique_together = (
-            "role",
-            "permission",
-        )
-
-    def __str__(self):
-        return f"{self.role} -> {self.permission}"
-
-
-class UserRole(BaseModel):
-    user = models.ForeignKey(
-        User,
-        on_delete=models.CASCADE,
-        related_name="user_roles",
-    )
-
-    role = models.ForeignKey(
-        Role,
-        on_delete=models.CASCADE,
-        related_name="role_users",
-    )
-
-    class Meta:
-        unique_together = (
-            "user",
-            "role",
-        )
-
-    def __str__(self):
-        return f"{self.user} -> {self.role}"
+    def has_permission(self, permission_code: str) -> bool:
+        return self.roles.filter(
+            permissions__code=permission_code,
+        ).exists()

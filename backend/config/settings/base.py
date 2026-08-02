@@ -20,11 +20,8 @@ load_dotenv(dotenv_path=ENV_PATH)
 # 3. Define your standard Django BASE_DIR (usually the backend folder)
 BASE_DIR = ROOT_DIR / "backend"
 
-# 4. Reference your variables using os.environ
 SECRET_KEY = os.environ.get("DJANGO_SECRET_KEY", "fallback-insecure-key")
-DEBUG = os.environ.get("DJANGO_DEBUG", "False").lower() in ("true", "1", "t")
 
-ALLOWED_HOSTS = os.environ.get("DJANGO_ALLOWED_HOSTS", "").split(",")
 
 INSTALLED_APPS = [
     "django.contrib.admin",
@@ -149,7 +146,6 @@ REST_FRAMEWORK = {
     "DEFAULT_AUTHENTICATION_CLASSES": [
         "rest_framework_simplejwt.authentication.JWTAuthentication",
     ],
-    "EXCEPTION_HANDLER": ("config.exceptions.handler.custom_exception_handler"),
     "DEFAULT_FILTER_BACKENDS": [
         "django_filters.rest_framework.DjangoFilterBackend",
     ],
