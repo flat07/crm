@@ -32,8 +32,6 @@ class CompanyViewSet(viewsets.ModelViewSet):
         "email",
         "phone",
         "website",
-        "city",
-        "country",
     )
 
     ordering_fields = (
