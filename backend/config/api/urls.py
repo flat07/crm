@@ -15,6 +15,10 @@ urlpatterns = [
         include("deals.urls"),
     ),
     path(
+        "leads/",
+        include("leads.urls"),
+    ),
+    path(
         "staff/",
         include("staff.urls"),
     ),

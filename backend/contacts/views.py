@@ -33,15 +33,24 @@ class ContactViewSet(viewsets.ModelViewSet):
         "email",
         "phone",
         "mobile",
+        "job_title",
         "company__name",
+        "owner__first_name",
+        "owner__last_name",
+        "city",
+        "country",
     )
 
     ordering_fields = (
         "first_name",
         "last_name",
         "created_at",
+        "birthday",
     )
-    ordering = ("first_name",)
+    ordering = (
+        "first_name",
+        "last_name",
+    )
 
     permission_classes = (IsAuthenticated,)
 

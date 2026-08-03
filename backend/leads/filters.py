@@ -1,11 +1,11 @@
-# backend/deals/api/filters.py
+# backend/leads/filters.py
 
 from django_filters import rest_framework as filters
 
-from .models import Deal
+from .models import Lead
 
 
-class DealFilter(filters.FilterSet):
+class LeadFilter(filters.FilterSet):
     created_at_after = filters.DateFilter(
         field_name="created_at",
         lookup_expr="date__gte",
@@ -26,23 +26,13 @@ class DealFilter(filters.FilterSet):
         lookup_expr="lte",
     )
 
-    actual_close_after = filters.DateFilter(
-        field_name="actual_close_date",
+    estimated_value_min = filters.NumberFilter(
+        field_name="estimated_value",
         lookup_expr="gte",
     )
 
-    actual_close_before = filters.DateFilter(
-        field_name="actual_close_date",
-        lookup_expr="lte",
-    )
-
-    amount_min = filters.NumberFilter(
-        field_name="amount",
-        lookup_expr="gte",
-    )
-
-    amount_max = filters.NumberFilter(
-        field_name="amount",
+    estimated_value_max = filters.NumberFilter(
+        field_name="estimated_value",
         lookup_expr="lte",
     )
 
@@ -57,11 +47,11 @@ class DealFilter(filters.FilterSet):
     )
 
     class Meta:
-        model = Deal
+        model = Lead
 
         fields = (
-            "stage",
-            "lead",
+            "status",
+            "source",
             "company",
             "contact",
             "owner",

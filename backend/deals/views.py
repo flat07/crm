@@ -30,6 +30,7 @@ class DealViewSet(viewsets.ModelViewSet):
         "company__name",
         "contact__first_name",
         "contact__last_name",
+        "lead__title",
         "description",
     )
 
@@ -37,6 +38,7 @@ class DealViewSet(viewsets.ModelViewSet):
         "amount",
         "probability",
         "expected_close_date",
+        "actual_close_date",
         "created_at",
     )
 

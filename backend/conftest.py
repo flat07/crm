@@ -9,4 +9,5 @@ pytest_plugins = (
     "contacts.tests.fixtures",
     "companies.tests.fixtures",
     "deals.tests.fixtures",
+    "leads.tests.fixtures",
 )
