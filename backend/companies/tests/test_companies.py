@@ -12,10 +12,10 @@ pytestmark = pytest.mark.django_db
 class TestCompanyList:
     endpoint = "/api/v1/companies/"
 
-    def test_returns_company_list(self, auth_client):
+    def test_returns_company_list(self, auth_admin):
         CompanyFactory.create_batch(3)
 
-        response = auth_client.get(self.endpoint)
+        response = auth_admin.get(self.endpoint)
 
         assert response.status_code == status.HTTP_200_OK
         assert len(response.data) == 3
@@ -24,10 +24,10 @@ class TestCompanyList:
 class TestCompanyRetrieve:
     endpoint = "/api/v1/companies/{id}/"
 
-    def test_returns_company_detail(self, auth_client):
+    def test_returns_company_detail(self, auth_admin):
         company = CompanyFactory()
 
-        response = auth_client.get(
+        response = auth_admin.get(
             self.endpoint.format(id=company.id),
         )
 
@@ -37,9 +37,9 @@ class TestCompanyRetrieve:
 
     def test_returns_404_for_unknown_company(
         self,
-        auth_client,
+        auth_admin,
     ):
-        response = auth_client.get(
+        response = auth_admin.get(
             "/api/v1/companies/00000000-0000-0000-0000-000000000000/",
         )
 
@@ -51,7 +51,7 @@ class TestCompanyCreate:
 
     def test_creates_company(
         self,
-        auth_client,
+        auth_admin,
     ):
         payload = {
             "name": "OpenAI",
@@ -61,13 +61,11 @@ class TestCompanyCreate:
             "country": "United States",
         }
 
-        response = auth_client.post(
+        response = auth_admin.post(
             self.endpoint,
             payload,
             format="json",
         )
-        print(response.status_code)
-        print(response.data)
 
         assert response.status_code == status.HTTP_201_CREATED
 
@@ -75,8 +73,8 @@ class TestCompanyCreate:
             name="OpenAI",
         ).exists()
 
-    def test_requires_name(self, auth_client):
-        response = auth_client.post(
+    def test_requires_name(self, auth_admin):
+        response = auth_admin.post(
             self.endpoint,
             {},
             format="json",
@@ -89,13 +87,13 @@ class TestCompanyCreate:
 class TestCompanyUpdate:
     def test_updates_company(
         self,
-        auth_client,
+        auth_admin,
     ):
         company = CompanyFactory(
             name="Old Name",
         )
 
-        response = auth_client.patch(
+        response = auth_admin.patch(
             f"/api/v1/companies/{company.id}/",
             {
                 "name": "New Name",
@@ -115,11 +113,11 @@ class TestCompanyDelete:
 
     def test_soft_deletes_company(
         self,
-        auth_client,
+        auth_admin,
     ):
         company = CompanyFactory()
 
-        response = auth_client.delete(
+        response = auth_admin.delete(
             self.endpoint.format(id=company.id),
         )
 

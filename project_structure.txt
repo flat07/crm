@@ -1,19 +1,18 @@
 .
-├── Makefile
+├── README.md
 ├── backend
+│   ├── Makefile
 │   ├── activities
 │   │   ├── __init__.py
 │   │   ├── admin.py
 │   │   ├── apps.py
 │   │   ├── models.py
-│   │   ├── tests.py
 │   │   └── views.py
 │   ├── attachments
 │   │   ├── __init__.py
 │   │   ├── admin.py
 │   │   ├── apps.py
 │   │   ├── models.py
-│   │   ├── tests.py
 │   │   └── views.py
 │   ├── common
 │   │   ├── __init__.py
@@ -22,68 +21,127 @@
 │   │   ├── choices.py
 │   │   ├── constants.py
 │   │   ├── exceptions.py
+│   │   ├── management
+│   │   │   ├── __init__.py
+│   │   │   └── commands
+│   │   │       ├── __init__.py
+│   │   │       └── seed.py
 │   │   ├── managers.py
 │   │   ├── models.py
-│   │   ├── tests.py
+│   │   ├── pagination.py
+│   │   ├── seeders
+│   │   │   ├── activities.py
+│   │   │   ├── companies.py
+│   │   │   ├── contacts.py
+│   │   │   ├── deals.py
+│   │   │   ├── departments.py
+│   │   │   ├── leadassignment.py
+│   │   │   ├── leads.py
+│   │   │   ├── permissions.py
+│   │   │   ├── roles.py
+│   │   │   ├── staff.py
+│   │   │   └── users.py
 │   │   ├── validators.py
 │   │   └── views.py
 │   ├── companies
 │   │   ├── __init__.py
 │   │   ├── admin.py
 │   │   ├── apps.py
+│   │   ├── filters.py
 │   │   ├── models.py
-│   │   ├── tests.py
+│   │   ├── permissions.py
+│   │   ├── selectors.py
+│   │   ├── serializers.py
+│   │   ├── services.py
+│   │   ├── tests
+│   │   │   ├── __init__.py
+│   │   │   ├── factories.py
+│   │   │   ├── test_companies.py
+│   │   │   └── test_company_permissions.py
+│   │   ├── urls.py
 │   │   └── views.py
 │   ├── config
 │   │   ├── __init__.py
+│   │   ├── api
+│   │   │   └── urls.py
 │   │   ├── asgi.py
-│   │   ├── settings.py
+│   │   ├── exceptions
+│   │   │   └── handler.py
+│   │   ├── settings
+│   │   │   ├── __init__.py
+│   │   │   ├── base.py
+│   │   │   ├── dev.py
+│   │   │   ├── local.py
+│   │   │   └── prod.py
 │   │   ├── urls.py
 │   │   └── wsgi.py
+│   ├── conftest.py
 │   ├── contacts
 │   │   ├── __init__.py
 │   │   ├── admin.py
 │   │   ├── apps.py
+│   │   ├── filters.py
 │   │   ├── models.py
-│   │   ├── tests.py
+│   │   ├── permissions.py
+│   │   ├── selectors.py
+│   │   ├── serializers.py
+│   │   ├── services.py
+│   │   ├── tests
+│   │   │   ├── __init__.py
+│   │   │   ├── factories.py
+│   │   │   ├── test_contact_permissions.py
+│   │   │   └── test_contacts.py
+│   │   ├── urls.py
 │   │   └── views.py
 │   ├── dashboard
 │   │   ├── __init__.py
 │   │   ├── admin.py
 │   │   ├── apps.py
 │   │   ├── models.py
-│   │   ├── tests.py
 │   │   └── views.py
 │   ├── deals
 │   │   ├── __init__.py
 │   │   ├── admin.py
 │   │   ├── apps.py
 │   │   ├── models.py
-│   │   ├── tests.py
 │   │   └── views.py
 │   ├── leads
 │   │   ├── __init__.py
 │   │   ├── admin.py
 │   │   ├── apps.py
 │   │   ├── models.py
-│   │   ├── tests.py
 │   │   └── views.py
+│   ├── logs
+│   │   └── django.log
 │   ├── manage.py
 │   ├── notes
 │   │   ├── __init__.py
 │   │   ├── admin.py
 │   │   ├── apps.py
 │   │   ├── models.py
-│   │   ├── tests.py
 │   │   └── views.py
 │   ├── requirements.txt
-│   └── staff
-│       ├── __init__.py
-│       ├── admin.py
-│       ├── apps.py
-│       ├── models.py
-│       ├── tests.py
-│       └── views.py
-└── project_structure.txt
+│   ├── staff
+│   │   ├── __init__.py
+│   │   ├── admin.py
+│   │   ├── apps.py
+│   │   ├── auth_views.py
+│   │   ├── managers.py
+│   │   ├── models.py
+│   │   ├── permissions.py
+│   │   ├── selectors.py
+│   │   ├── serializers.py
+│   │   ├── services.py
+│   │   ├── tests
+│   │   │   ├── __init__.py
+│   │   │   ├── auth.http
+│   │   │   ├── factories.py
+│   │   │   ├── test_auth.py
+│   │   │   └── test_users.py
+│   │   ├── urls.py
+│   │   └── views.py
+│   └── static
+├── project_structure.txt
+└── pytest.ini
 
-13 directories, 74 files
+24 directories, 121 files

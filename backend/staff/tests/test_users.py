@@ -13,12 +13,12 @@ class TestUserList:
 
     def test_returns_users(
         self,
-        auth_client,
+        auth_admin,
     ):
         initial_count = User.objects.count()
         UserFactory.create_batch(3)
 
-        response = auth_client.get(self.endpoint)
+        response = auth_admin.get(self.endpoint)
 
         assert response.status_code == status.HTTP_200_OK
         assert len(response.data) == initial_count + 3
@@ -27,11 +27,11 @@ class TestUserList:
 class TestUserRetrieve:
     def test_returns_user(
         self,
-        auth_client,
+        auth_admin,
     ):
         user = UserFactory()
 
-        response = auth_client.get(f"/api/v1/staff/users/{user.id}/")
+        response = auth_admin.get(f"/api/v1/staff/users/{user.id}/")
 
         assert response.status_code == status.HTTP_200_OK
         assert response.data["id"] == str(user.id)
@@ -42,7 +42,7 @@ class TestUserCreate:
 
     def test_creates_user(
         self,
-        auth_client,
+        auth_admin,
     ):
         payload = {
             "email": "john@example.com",
@@ -51,7 +51,7 @@ class TestUserCreate:
             "password": "password123",
         }
 
-        response = auth_client.post(
+        response = auth_admin.post(
             self.endpoint,
             payload,
             format="json",
@@ -65,11 +65,11 @@ class TestUserCreate:
 class TestUserUpdate:
     def test_updates_user(
         self,
-        auth_client,
+        auth_admin,
     ):
         user = UserFactory()
 
-        response = auth_client.patch(
+        response = auth_admin.patch(
             f"/api/v1/staff/users/{user.id}/",
             {
                 "first_name": "Updated",
@@ -87,11 +87,11 @@ class TestUserUpdate:
 class TestUserDelete:
     def test_deletes_user(
         self,
-        auth_client,
+        auth_admin,
     ):
         user = UserFactory()
 
-        response = auth_client.delete(f"/api/v1/staff/users/{user.id}/")
+        response = auth_admin.delete(f"/api/v1/staff/users/{user.id}/")
 
         assert response.status_code == status.HTTP_204_NO_CONTENT
 
