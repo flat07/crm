@@ -40,6 +40,14 @@ class LoginSerializer(TokenObtainPairSerializer):
     #     "roles": [
     #     "Administrator"
     #     ],
+    #     "permissions": [
+    #         "company.view",
+    #         "company.create",
+    #         "company.update",
+    #         "company.delete",
+    #         "contact.view",
+    #         "contact.create"
+    #     ],
     #     "avatar": null,
     #     "job_title": ""
     #     }
@@ -85,6 +93,7 @@ class UserDetailSerializer(serializers.ModelSerializer):
     roles = serializers.StringRelatedField(
         many=True,
     )
+    permissions = serializers.SerializerMethodField()
 
     class Meta:
         model = User
@@ -94,9 +103,18 @@ class UserDetailSerializer(serializers.ModelSerializer):
             "first_name",
             "last_name",
             "department",
+            "permissions",
             "roles",
             "avatar",
             "job_title",
+        )
+
+    def get_permissions(self, obj):
+        return list(
+            obj.roles.values_list(
+                "permissions__code",
+                flat=True,
+            ).distinct()
         )
 
 

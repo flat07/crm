@@ -242,7 +242,8 @@
 │   │   │   │   └── staff
 │   │   │   │       ├── Footer.tsx
 │   │   │   │       ├── Header.tsx
-│   │   │   │       └── StaffMain.tsx
+│   │   │   │       ├── StaffMain.tsx
+│   │   │   │       └── navigation.ts
 │   │   │   ├── shared
 │   │   │   │   ├── AppErrorBoundary.tsx
 │   │   │   │   ├── EmptyState.tsx
@@ -265,8 +266,7 @@
 │   │   │       ├── sonner.tsx
 │   │   │       └── textarea.tsx
 │   │   ├── config
-│   │   │   ├── api.ts
-│   │   │   └── routes.ts
+│   │   │   └── api.ts
 │   │   ├── contexts
 │   │   │   ├── AuthContext.test.tsx
 │   │   │   └── AuthContext.tsx
@@ -278,11 +278,13 @@
 │   │   │       │   └── refresh.ts
 │   │   │       ├── components
 │   │   │       │   ├── LoginForm.test.tsx
-│   │   │       │   └── LoginForm.tsx
+│   │   │       │   ├── LoginForm.tsx
+│   │   │       │   └── PermissionGuard.tsx
 │   │   │       ├── hooks
 │   │   │       │   ├── useLogin.ts
 │   │   │       │   ├── useLogout.ts
-│   │   │       │   └── useMe.ts
+│   │   │       │   ├── useMe.ts
+│   │   │       │   └── usePermissions.ts
 │   │   │       ├── pages
 │   │   │       │   ├── DashboardPage.tsx
 │   │   │       │   ├── LoginPage.test.tsx
@@ -291,6 +293,7 @@
 │   │   │       │   └── loginSchema.ts
 │   │   │       ├── types.ts
 │   │   │       └── utils
+│   │   │           ├── permissions.ts
 │   │   │           └── token.ts
 │   │   ├── index.css
 │   │   ├── lib
@@ -301,7 +304,8 @@
 │   │   └── routes
 │   │       ├── GuestRoute.tsx
 │   │       ├── ProtectedRoute.test.tsx
-│   │       └── ProtectedRoute.tsx
+│   │       ├── ProtectedRoute.tsx
+│   │       └── RequirePermission.tsx
 │   ├── tsconfig.app.json
 │   ├── tsconfig.json
 │   ├── tsconfig.node.json
@@ -309,4 +313,4 @@
 ├── project_structure.txt
 └── pytest.ini
 
-52 directories, 258 files
+52 directories, 262 files

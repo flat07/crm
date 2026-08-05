@@ -10,6 +10,7 @@ from django.contrib.auth.models import (
     PermissionsMixin,
 )
 from django.db import models
+from django.utils.functional import cached_property
 
 from .managers import UserManager
 
@@ -153,7 +154,14 @@ class User(AbstractBaseUser, PermissionsMixin, BaseModel):
 
         return self.roles.filter(name=role_name).exists()
 
-    def has_permission(self, permission_code: str) -> bool:
-        return self.roles.filter(
-            permissions__code=permission_code,
-        ).exists()
+    @cached_property
+    def permission_codes(self):
+        return set(
+            self.roles.values_list(
+                "permissions__code",
+                flat=True,
+            ).distinct()
+        )
+
+    def has_permission(self, permission_code):
+        return permission_code in self.permission_codes

@@ -19,6 +19,7 @@ export interface User {
   roles: string[];
   avatar: string | null;
   job_title: string;
+  permissions: string[];
 }
 
 export interface LoginResponse {
