@@ -2,7 +2,13 @@
 
 from rest_framework import serializers
 
-from .models import Contact
+from .models import (
+    Contact,
+    ContactEmail,
+    ContactPhone,
+    ContactTag,
+    ContactTagAssignment,
+)
 
 
 class ContactSerializer(serializers.ModelSerializer):
@@ -50,4 +56,76 @@ class ContactSerializer(serializers.ModelSerializer):
         return update_contact(
             contact=instance,
             **validated_data,
+        )
+
+
+class ContactTagSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = ContactTag
+        fields = (
+            "id",
+            "name",
+            "created_at",
+            "updated_at",
+        )
+        read_only_fields = (
+            "id",
+            "created_at",
+            "updated_at",
+        )
+
+
+class ContactEmailSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = ContactEmail
+        fields = (
+            "id",
+            "contact",
+            "email",
+            "is_primary",
+            "created_at",
+            "updated_at",
+        )
+
+        read_only_fields = (
+            "id",
+            "created_at",
+            "updated_at",
+        )
+
+
+class ContactPhoneSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = ContactPhone
+        fields = (
+            "id",
+            "contact",
+            "phone",
+            "is_primary",
+            "created_at",
+            "updated_at",
+        )
+
+        read_only_fields = (
+            "id",
+            "created_at",
+            "updated_at",
+        )
+
+
+class ContactTagAssignmentSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = ContactTagAssignment
+        fields = (
+            "id",
+            "contact",
+            "tag",
+            "created_at",
+            "updated_at",
+        )
+
+        read_only_fields = (
+            "id",
+            "created_at",
+            "updated_at",
         )

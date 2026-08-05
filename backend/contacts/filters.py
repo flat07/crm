@@ -2,7 +2,13 @@
 
 from django_filters import rest_framework as filters
 
-from .models import Contact
+from .models import (
+    Contact,
+    ContactEmail,
+    ContactPhone,
+    ContactTag,
+    ContactTagAssignment,
+)
 
 
 class ContactFilter(filters.FilterSet):
@@ -46,3 +52,40 @@ class ContactFilter(filters.FilterSet):
             "owner",
             "is_active",
         )
+
+
+class ContactTagFilter(filters.FilterSet):
+    class Meta:
+        model = ContactTag
+        fields = {  # noqa: RUF012
+            "name": ["exact", "icontains"],
+        }
+
+
+class ContactEmailFilter(filters.FilterSet):
+    class Meta:
+        model = ContactEmail
+        fields = {  # noqa: RUF012
+            "contact": ["exact"],
+            "email": ["exact", "icontains"],
+            "is_primary": ["exact"],
+        }
+
+
+class ContactPhoneFilter(filters.FilterSet):
+    class Meta:
+        model = ContactPhone
+        fields = {  # noqa: RUF012
+            "contact": ["exact"],
+            "phone": ["exact", "icontains"],
+            "is_primary": ["exact"],
+        }
+
+
+class ContactTagAssignmentFilter(filters.FilterSet):
+    class Meta:
+        model = ContactTagAssignment
+        fields = {  # noqa: RUF012
+            "contact": ["exact"],
+            "tag": ["exact"],
+        }

@@ -73,7 +73,9 @@ class ActivityViewSet(viewsets.ModelViewSet):
         return [permission() for permission in permission_classes]
 
     def get_queryset(self):
-        return selectors.activity_list()
+        sel = selectors.activity_list()
+        print("DEBUG: sel ", sel)
+        return sel
 
     def perform_create(self, serializer):
         serializer.instance = services.create_activity(

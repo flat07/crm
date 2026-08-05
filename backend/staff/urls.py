@@ -53,6 +53,10 @@ urlpatterns = [
 urlpatterns += router.urls
 
 # /api/v1/staff/users/
+# /api/v1/staff/auth/change-password/
+# /api/v1/staff/auth/me/
+# /api/v1/staff/auth/refresh/
+# /api/v1/staff/auth/logout/
 # /api/v1/staff/auth/login/
 # {
 #   "refresh": "",

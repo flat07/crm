@@ -23,6 +23,10 @@ urlpatterns = [
         include("activities.urls"),
     ),
     path(
+        "attachments/",
+        include("attachments.urls"),
+    ),
+    path(
         "staff/",
         include("staff.urls"),
     ),

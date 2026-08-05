@@ -5,7 +5,14 @@ import factory
 from companies.tests.factories import CompanyFactory
 from faker import Faker
 
-from contacts.models import Contact, ContactSource, ContactType
+from contacts.models import (
+    Contact,
+    ContactEmail,
+    ContactPhone,
+    ContactSource,
+    ContactTag,
+    ContactType,
+)
 
 faker = Faker()
 
@@ -29,3 +36,28 @@ class ContactFactory(factory.django.DjangoModelFactory):
     # Nullable FKs — default to None so we don't spin up a User on every company.
     # Override in tests when needed: ContactFactory(owner=some_user)
     owner = None
+
+
+class ContactTagFactory(factory.django.DjangoModelFactory):
+    class Meta:
+        model = ContactTag
+
+    name = factory.Sequence(lambda n: f"Tag {n}")  # type: ignore
+
+
+class ContactEmailFactory(factory.django.DjangoModelFactory):
+    class Meta:
+        model = ContactEmail
+
+    contact = factory.SubFactory(ContactFactory)  # type: ignore
+    email = factory.Faker("email")  # type: ignore
+    is_primary = False  # type: ignore
+
+
+class ContactPhoneFactory(factory.django.DjangoModelFactory):
+    class Meta:
+        model = ContactPhone
+
+    contact = factory.SubFactory(ContactFactory)  # type: ignore
+    phone = factory.Faker("phone_number")  # type: ignore
+    is_primary = False  # type: ignore

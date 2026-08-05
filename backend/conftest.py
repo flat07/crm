@@ -1,4 +1,5 @@
 # tests/conftest.py
+import pytest
 
 pytest_plugins = (
     "common.tests.fixtures.api",
@@ -11,4 +12,20 @@ pytest_plugins = (
     "deals.tests.fixtures",
     "leads.tests.fixtures",
     "activities.tests.fixtures",
+    "attachments.tests.fixtures",
 )
+
+
+@pytest.fixture(autouse=True)
+def media_storage(settings, tmp_path):
+    settings.STORAGES = {
+        "default": {
+            "BACKEND": "django.core.files.storage.FileSystemStorage",
+            "OPTIONS": {
+                "location": tmp_path,
+            },
+        },
+        "staticfiles": {
+            "BACKEND": "django.contrib.staticfiles.storage.StaticFilesStorage",
+        },
+    }

@@ -1,4 +1,4 @@
-# backend/companies/tests/test_companies.py
+# backend/contacts/tests/test_contacts.py
 
 import pytest
 from companies.tests.factories import CompanyFactory

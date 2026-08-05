@@ -2,7 +2,7 @@
 
 ### Variables (Update these after logging in)
 @baseUrl = http://localhost:8000
-@accessToken = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzgzMzE1NDIxLCJpYXQiOjE3ODMzMTUxMjEsImp0aSI6IjVjMjNlZWYzNjY5OTRiMmY5M2I1MWVkYTEwMTg0YzM2IiwidXNlcl9pZCI6IjEifQ.i9iN8sqiSAE95P6ENrwJHOzOWTjBJe-BZvLd3lczmLY
+@accessToken = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzg1Nzc2Njc4LCJpYXQiOjE3ODU3NzU3NzgsImp0aSI6ImJjYjQ2ZmViNDYzYzQxN2ZhOTA1NTBhYWIxZWQ1OGUwIiwidXNlcl9pZCI6IjViYjI1NGIyLTZiM2ItNDIyZi05MTE2LTJiNTViYzFlNGNlYyJ9.worDptGaTZ0BJj_3AOJGEFmPA95mfAeN0djfqhOF5N4
 @refreshToken = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoicmVmcmVzaCIsImV4cCI6MTc4MzQwMDIwMiwiaWF0IjoxNzgzMzEzODAyLCJqdGkiOiI2ZGE5NzViMDQ3N2Y0ZTgzYjNmZmU0NDZhMzMxYzM3YSIsInVzZXJfaWQiOiIxIn0.r8Qo_lHmEkwC6dZqGZOsjHBvkzW3DaNXzgZVkxmxfmw
 
 ### Register a new user
@@ -35,6 +35,20 @@ Content-Type: application/json
 {
     "refresh": "{{refreshToken}}"
 }
+### Get list of contacts
+GET {{baseUrl}}//api/v1/contacts/
+Content-Type: application/json
+Authorization: Bearer {{accessToken}}
+
+### Get list of contact tags
+GET {{baseUrl}}//api/v1/contacts/tags
+Content-Type: application/json
+Authorization: Bearer {{accessToken}}
+
+### Get list of todos
+GET {{baseUrl}}/api/todos/?search=django
+Content-Type: application/json
+Authorization: Bearer {{accessToken}}
 
 ### Post new todo
 POST {{baseUrl}}/api/todos/
@@ -60,14 +74,7 @@ Authorization: Bearer {{accessToken}}
 {
     "title": " "
 }
-### Get list of todos
-GET {{baseUrl}}/api/todos/
-Content-Type: application/json
-Authorization: Bearer {{accessToken}}
-### Get list of todos
-GET {{baseUrl}}/api/todos/?search=django
-Content-Type: application/json
-Authorization: Bearer {{accessToken}}
+
 
 
 ### Post update todo
