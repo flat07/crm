@@ -25,7 +25,7 @@ class TestAttachmentList:
         )
 
         assert response.status_code == status.HTTP_200_OK
-        assert len(response.data) == 3
+        assert len(response.data["results"]) == 3
 
 
 class TestAttachmentRetrieve:
@@ -180,4 +180,4 @@ class TestAttachmentGenericRelation:
         )
 
         assert response.status_code == 200
-        assert len(response.data) == 1
+        assert len(response.data["results"]) == 1

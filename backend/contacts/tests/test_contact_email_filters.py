@@ -39,8 +39,8 @@ class TestContactEmailFilterContact:
         )
 
         assert response.status_code == status.HTTP_200_OK
-        assert len(response.data) == 1
-        assert response.data[0]["contact"] == contact1.id
+        assert len(response.data["results"]) == 1
+        assert response.data["results"][0]["contact"] == contact1.id
 
 
 class TestContactEmailFilterEmailExact:
@@ -61,8 +61,8 @@ class TestContactEmailFilterEmailExact:
         )
 
         assert response.status_code == status.HTTP_200_OK
-        assert len(response.data) == 1
-        assert response.data[0]["email"] == "john@example.com"
+        assert len(response.data["results"]) == 1
+        assert response.data["results"][0]["email"] == "john@example.com"
 
 
 class TestContactEmailFilterEmailContains:
@@ -84,9 +84,9 @@ class TestContactEmailFilterEmailContains:
         )
 
         assert response.status_code == status.HTTP_200_OK
-        assert len(response.data) == 2
+        assert len(response.data["results"]) == 2
 
-        emails = {item["email"] for item in response.data}
+        emails = {item["email"] for item in response.data["results"]}
 
         assert emails == {
             "john@example.com",
@@ -119,8 +119,8 @@ class TestContactEmailFilterPrimary:
         )
 
         assert response.status_code == status.HTTP_200_OK
-        assert len(response.data) == 1
-        assert response.data[0]["email"] == "primary@example.com"
+        assert len(response.data["results"]) == 1
+        assert response.data["results"][0]["email"] == "primary@example.com"
 
     def test_filters_non_primary_emails(
         self,
@@ -144,8 +144,8 @@ class TestContactEmailFilterPrimary:
         )
 
         assert response.status_code == status.HTTP_200_OK
-        assert len(response.data) == 1
-        assert response.data[0]["email"] == "secondary@example.com"
+        assert len(response.data["results"]) == 1
+        assert response.data["results"][0]["email"] == "secondary@example.com"
 
 
 class TestContactEmailSearch:
@@ -171,8 +171,8 @@ class TestContactEmailSearch:
         )
 
         assert response.status_code == status.HTTP_200_OK
-        assert len(response.data) == 1
-        assert response.data[0]["email"] == "john@example.com"
+        assert len(response.data["results"]) == 1
+        assert response.data["results"][0]["email"] == "john@example.com"
 
     def test_search_contact_first_name(
         self,
@@ -206,8 +206,8 @@ class TestContactEmailSearch:
         )
 
         assert response.status_code == status.HTTP_200_OK
-        assert len(response.data) == 1
-        assert response.data[0]["contact"] == john.id
+        assert len(response.data["results"]) == 1
+        assert response.data["results"][0]["contact"] == john.id
 
     def test_search_returns_empty(
         self,
@@ -223,7 +223,7 @@ class TestContactEmailSearch:
         )
 
         assert response.status_code == status.HTTP_200_OK
-        assert response.data == []
+        assert response.data["results"] == []
 
 
 class TestContactEmailOrdering:
@@ -250,7 +250,7 @@ class TestContactEmailOrdering:
 
         assert response.status_code == status.HTTP_200_OK
 
-        emails = [item["email"] for item in response.data]
+        emails = [item["email"] for item in response.data["results"]]
 
         assert emails == sorted(emails)
 
@@ -275,7 +275,7 @@ class TestContactEmailOrdering:
 
         assert response.status_code == status.HTTP_200_OK
 
-        emails = [item["email"] for item in response.data]
+        emails = [item["email"] for item in response.data["results"]]
 
         assert emails == sorted(
             emails,

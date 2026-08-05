@@ -24,8 +24,8 @@ class TestContactSearch:
         )
 
         assert response.status_code == status.HTTP_200_OK
-        assert len(response.data) == 1
-        assert response.data[0]["first_name"] == "John"
+        assert len(response.data["results"]) == 1
+        assert response.data["results"][0]["first_name"] == "John"
 
 
 class TestContactFilterType:
@@ -43,8 +43,8 @@ class TestContactFilterType:
         )
 
         assert response.status_code == status.HTTP_200_OK
-        assert len(response.data) == 1
-        assert response.data[0]["contact_type"] == ContactType.CUSTOMER
+        assert len(response.data["results"]) == 1
+        assert response.data["results"][0]["contact_type"] == ContactType.CUSTOMER
 
 
 class TestContactFilterSource:
@@ -62,8 +62,8 @@ class TestContactFilterSource:
         )
 
         assert response.status_code == status.HTTP_200_OK
-        assert len(response.data) == 1
-        assert response.data[0]["source"] == ContactSource.WEBSITE
+        assert len(response.data["results"]) == 1
+        assert response.data["results"][0]["source"] == ContactSource.WEBSITE
 
 
 class TestContactFilterCompany:
@@ -83,7 +83,7 @@ class TestContactFilterCompany:
         )
 
         assert response.status_code == status.HTTP_200_OK
-        assert len(response.data) == 1
+        assert len(response.data["results"]) == 1
 
 
 class TestContactFilterOwner:
@@ -103,7 +103,7 @@ class TestContactFilterOwner:
         )
 
         assert response.status_code == status.HTTP_200_OK
-        assert len(response.data) == 1
+        assert len(response.data["results"]) == 1
 
 
 class TestContactFilterCity:
@@ -121,8 +121,8 @@ class TestContactFilterCity:
         )
 
         assert response.status_code == status.HTTP_200_OK
-        assert len(response.data) == 1
-        assert response.data[0]["city"] == "Tashkent"
+        assert len(response.data["results"]) == 1
+        assert response.data["results"][0]["city"] == "Tashkent"
 
 
 class TestContactFilterCountry:
@@ -140,7 +140,7 @@ class TestContactFilterCountry:
         )
 
         assert response.status_code == status.HTTP_200_OK
-        assert len(response.data) == 1
+        assert len(response.data["results"]) == 1
 
 
 class TestContactFilterBirthday:
@@ -158,7 +158,7 @@ class TestContactFilterBirthday:
         )
 
         assert response.status_code == status.HTTP_200_OK
-        assert len(response.data) == 1
+        assert len(response.data["results"]) == 1
 
     def test_filter_birthday_before(self, auth_admin):
         ContactFactory(birthday="1990-01-01")
@@ -172,7 +172,7 @@ class TestContactFilterBirthday:
         )
 
         assert response.status_code == status.HTTP_200_OK
-        assert len(response.data) == 1
+        assert len(response.data["results"]) == 1
 
 
 class TestContactOrdering:
@@ -190,7 +190,7 @@ class TestContactOrdering:
         )
 
         assert response.status_code == status.HTTP_200_OK
-        assert response.data[0]["last_name"] == "Alpha"
+        assert response.data["results"][0]["last_name"] == "Alpha"
 
     def test_order_by_created_desc(self, auth_admin):
         older = ContactFactory()
@@ -205,6 +205,6 @@ class TestContactOrdering:
 
         assert response.status_code == status.HTTP_200_OK
 
-        ids = [item["id"] for item in response.data]
+        ids = [item["id"] for item in response.data["results"]]
 
         assert ids.index(str(newer.id)) < ids.index(str(older.id))

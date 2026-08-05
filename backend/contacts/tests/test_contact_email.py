@@ -24,7 +24,7 @@ class TestContactEmailList:
         response = auth_admin.get(self.endpoint)
 
         assert response.status_code == status.HTTP_200_OK
-        assert len(response.data) == 3
+        assert len(response.data["results"]) == 3
 
 
 class TestContactEmailRetrieve:
@@ -41,6 +41,7 @@ class TestContactEmailRetrieve:
         )
 
         assert response.status_code == status.HTTP_200_OK
+        print("DEBUG: response.data ", response.data)
         assert response.data["id"] == str(email.id)
         assert response.data["email"] == email.email
 

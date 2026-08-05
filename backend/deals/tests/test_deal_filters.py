@@ -35,7 +35,7 @@ class TestDealSearch:
         )
 
         assert response.status_code == status.HTTP_200_OK
-        assert len(response.data) == 1
+        assert len(response.data["results"]) == 1
 
 
 class TestDealFilterStage:
@@ -61,8 +61,8 @@ class TestDealFilterStage:
         )
 
         assert response.status_code == status.HTTP_200_OK
-        assert len(response.data) == 1
-        assert response.data[0]["stage"] == DealStage.PROPOSAL
+        assert len(response.data["results"]) == 1
+        assert response.data["results"][0]["stage"] == DealStage.PROPOSAL
 
 
 class TestDealFilterCompany:
@@ -85,7 +85,7 @@ class TestDealFilterCompany:
         )
 
         assert response.status_code == status.HTTP_200_OK
-        assert len(response.data) == 1
+        assert len(response.data["results"]) == 1
 
 
 class TestDealFilterLead:
@@ -108,7 +108,7 @@ class TestDealFilterLead:
         )
 
         assert response.status_code == status.HTTP_200_OK
-        assert len(response.data) == 1
+        assert len(response.data["results"]) == 1
 
 
 class TestDealFilterContact:
@@ -131,7 +131,7 @@ class TestDealFilterContact:
         )
 
         assert response.status_code == status.HTTP_200_OK
-        assert len(response.data) == 1
+        assert len(response.data["results"]) == 1
 
 
 class TestDealFilterOwner:
@@ -154,7 +154,7 @@ class TestDealFilterOwner:
         )
 
         assert response.status_code == status.HTTP_200_OK
-        assert len(response.data) == 1
+        assert len(response.data["results"]) == 1
 
 
 class TestDealFilterAmount:
@@ -175,7 +175,7 @@ class TestDealFilterAmount:
         )
 
         assert response.status_code == status.HTTP_200_OK
-        assert len(response.data) == 1
+        assert len(response.data["results"]) == 1
 
     def test_filter_amount_max(
         self,
@@ -192,7 +192,7 @@ class TestDealFilterAmount:
         )
 
         assert response.status_code == status.HTTP_200_OK
-        assert len(response.data) == 1
+        assert len(response.data["results"]) == 1
 
 
 class TestDealFilterProbability:
@@ -213,7 +213,7 @@ class TestDealFilterProbability:
         )
 
         assert response.status_code == status.HTTP_200_OK
-        assert len(response.data) == 1
+        assert len(response.data["results"]) == 1
 
 
 class TestDealFilterDates:
@@ -239,7 +239,7 @@ class TestDealFilterDates:
         )
 
         assert response.status_code == status.HTTP_200_OK
-        assert len(response.data) == 1
+        assert len(response.data["results"]) == 1
 
 
 class TestDealOrdering:
@@ -266,7 +266,7 @@ class TestDealOrdering:
 
         assert response.status_code == status.HTTP_200_OK
 
-        assert response.data[0]["amount"] == "1000.00"
+        assert response.data["results"][0]["amount"] == "1000.00"
 
     def test_order_by_created_desc(
         self,
@@ -284,6 +284,6 @@ class TestDealOrdering:
 
         assert response.status_code == status.HTTP_200_OK
 
-        ids = [item["id"] for item in response.data]
+        ids = [item["id"] for item in response.data["results"]]
 
         assert ids.index(str(newer.id)) < ids.index(str(older.id))

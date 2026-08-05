@@ -32,8 +32,8 @@ class TestActivitySearch:
         )
 
         assert response.status_code == status.HTTP_200_OK
-        assert len(response.data) == 1
-        assert response.data[0]["title"] == "Team meeting"
+        assert len(response.data["results"]) == 1
+        assert response.data["results"][0]["title"] == "Team meeting"
 
 
 class TestActivityFilterActivityType:
@@ -54,8 +54,8 @@ class TestActivityFilterActivityType:
         )
 
         assert response.status_code == status.HTTP_200_OK
-        assert len(response.data) == 1
-        assert response.data[0]["activity_type"] == ActivityType.CALL
+        assert len(response.data["results"]) == 1
+        assert response.data["results"][0]["activity_type"] == ActivityType.CALL
 
 
 class TestActivityFilterStatus:
@@ -76,8 +76,8 @@ class TestActivityFilterStatus:
         )
 
         assert response.status_code == status.HTTP_200_OK
-        assert len(response.data) == 1
-        assert response.data[0]["status"] == ActivityStatus.COMPLETED
+        assert len(response.data["results"]) == 1
+        assert response.data["results"][0]["status"] == ActivityStatus.COMPLETED
 
 
 class TestActivityFilterPriority:
@@ -98,8 +98,8 @@ class TestActivityFilterPriority:
         )
 
         assert response.status_code == status.HTTP_200_OK
-        assert len(response.data) == 1
-        assert response.data[0]["priority"] == ActivityPriority.HIGH
+        assert len(response.data["results"]) == 1
+        assert response.data["results"][0]["priority"] == ActivityPriority.HIGH
 
 
 class TestActivityFilterOwner:
@@ -122,7 +122,7 @@ class TestActivityFilterOwner:
         )
 
         assert response.status_code == status.HTTP_200_OK
-        assert len(response.data) == 1
+        assert len(response.data["results"]) == 1
 
 
 class TestActivityFilterRelatedObject:
@@ -146,7 +146,7 @@ class TestActivityFilterRelatedObject:
         )
 
         assert response.status_code == status.HTTP_200_OK
-        assert len(response.data) == 1
+        assert len(response.data["results"]) == 1
 
 
 class TestActivityOrdering:
@@ -174,7 +174,7 @@ class TestActivityOrdering:
         )
 
         assert response.status_code == status.HTTP_200_OK
-        assert response.data[0]["title"] == "Soon"
+        assert response.data["results"][0]["title"] == "Soon"
 
     def test_order_by_created_desc(
         self,
@@ -192,6 +192,6 @@ class TestActivityOrdering:
 
         assert response.status_code == status.HTTP_200_OK
 
-        ids = [item["id"] for item in response.data]
+        ids = [item["id"] for item in response.data["results"]]
 
         assert ids.index(str(newer.id)) < ids.index(str(older.id))

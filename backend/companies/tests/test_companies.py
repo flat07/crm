@@ -18,7 +18,8 @@ class TestCompanyList:
         response = auth_admin.get(self.endpoint)
 
         assert response.status_code == status.HTTP_200_OK
-        assert len(response.data) == 3
+        assert response.data["count"] == Company.objects.count()
+        assert len(response.data["results"]) == 3
 
 
 class TestCompanyRetrieve:

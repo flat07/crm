@@ -39,8 +39,8 @@ class TestContactPhoneFilterContact:
         )
 
         assert response.status_code == status.HTTP_200_OK
-        assert len(response.data) == 1
-        assert response.data[0]["contact"] == contact1.id
+        assert len(response.data["results"]) == 1
+        assert response.data["results"][0]["contact"] == contact1.id
 
 
 class TestContactPhoneFilterPhoneExact:
@@ -61,8 +61,8 @@ class TestContactPhoneFilterPhoneExact:
         )
 
         assert response.status_code == status.HTTP_200_OK
-        assert len(response.data) == 1
-        assert response.data[0]["phone"] == "+15550000001"
+        assert len(response.data["results"]) == 1
+        assert response.data["results"][0]["phone"] == "+15550000001"
 
 
 class TestContactPhoneFilterPhoneContains:
@@ -84,9 +84,9 @@ class TestContactPhoneFilterPhoneContains:
         )
 
         assert response.status_code == status.HTTP_200_OK
-        assert len(response.data) == 2
+        assert len(response.data["results"]) == 2
 
-        phones = {item["phone"] for item in response.data}
+        phones = {item["phone"] for item in response.data["results"]}
 
         assert phones == {
             "+998901112233",
@@ -119,8 +119,8 @@ class TestContactPhoneFilterPrimary:
         )
 
         assert response.status_code == status.HTTP_200_OK
-        assert len(response.data) == 1
-        assert response.data[0]["phone"] == "+15550000001"
+        assert len(response.data["results"]) == 1
+        assert response.data["results"][0]["phone"] == "+15550000001"
 
     def test_filters_non_primary_phones(
         self,
@@ -144,5 +144,5 @@ class TestContactPhoneFilterPrimary:
         )
 
         assert response.status_code == status.HTTP_200_OK
-        assert len(response.data) == 1
-        assert response.data[0]["phone"] == "+15550000002"
+        assert len(response.data["results"]) == 1
+        assert response.data["results"][0]["phone"] == "+15550000002"

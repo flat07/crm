@@ -6,13 +6,39 @@
 │   │   ├── __init__.py
 │   │   ├── admin.py
 │   │   ├── apps.py
+│   │   ├── filters.py
 │   │   ├── models.py
+│   │   ├── permissions.py
+│   │   ├── selectors.py
+│   │   ├── serializers.py
+│   │   ├── services.py
+│   │   ├── tests
+│   │   │   ├── __init__.py
+│   │   │   ├── factories.py
+│   │   │   ├── fixtures.py
+│   │   │   ├── test_activities.py
+│   │   │   ├── test_activity_filters.py
+│   │   │   └── test_activity_permissions.py
+│   │   ├── urls.py
 │   │   └── views.py
 │   ├── attachments
 │   │   ├── __init__.py
 │   │   ├── admin.py
 │   │   ├── apps.py
+│   │   ├── filters.py
 │   │   ├── models.py
+│   │   ├── permissions.py
+│   │   ├── selectors.py
+│   │   ├── serializers.py
+│   │   ├── services.py
+│   │   ├── tests
+│   │   │   ├── __init__.py
+│   │   │   ├── factories.py
+│   │   │   ├── fixtures.py
+│   │   │   ├── test_attachment_filters.py
+│   │   │   ├── test_attachment_permissions.py
+│   │   │   └── test_attachments.py
+│   │   ├── urls.py
 │   │   └── views.py
 │   ├── common
 │   │   ├── __init__.py
@@ -41,6 +67,14 @@
 │   │   │   ├── roles.py
 │   │   │   ├── staff.py
 │   │   │   └── users.py
+│   │   ├── tests
+│   │   │   └── fixtures
+│   │   │       ├── __init__.py
+│   │   │       ├── api.py
+│   │   │       ├── auth.py
+│   │   │       ├── permissions.py
+│   │   │       ├── roles.py
+│   │   │       └── users.py
 │   │   ├── validators.py
 │   │   └── views.py
 │   ├── companies
@@ -56,7 +90,9 @@
 │   │   ├── tests
 │   │   │   ├── __init__.py
 │   │   │   ├── factories.py
+│   │   │   ├── fixtures.py
 │   │   │   ├── test_companies.py
+│   │   │   ├── test_company_filters.py
 │   │   │   └── test_company_permissions.py
 │   │   ├── urls.py
 │   │   └── views.py
@@ -89,7 +125,14 @@
 │   │   ├── tests
 │   │   │   ├── __init__.py
 │   │   │   ├── factories.py
+│   │   │   ├── fixtures.py
+│   │   │   ├── test_contact_email.py
+│   │   │   ├── test_contact_email_filters.py
+│   │   │   ├── test_contact_filters.py
 │   │   │   ├── test_contact_permissions.py
+│   │   │   ├── test_contact_phone.py
+│   │   │   ├── test_contact_phone_filters.py
+│   │   │   ├── test_contact_tags.py
 │   │   │   └── test_contacts.py
 │   │   ├── urls.py
 │   │   └── views.py
@@ -103,13 +146,39 @@
 │   │   ├── __init__.py
 │   │   ├── admin.py
 │   │   ├── apps.py
+│   │   ├── filters.py
 │   │   ├── models.py
+│   │   ├── permissions.py
+│   │   ├── selectors.py
+│   │   ├── serializers.py
+│   │   ├── services.py
+│   │   ├── tests
+│   │   │   ├── __init__.py
+│   │   │   ├── factories.py
+│   │   │   ├── fixtures.py
+│   │   │   ├── test_deal_filters.py
+│   │   │   ├── test_deal_permissions.py
+│   │   │   └── test_deals.py
+│   │   ├── urls.py
 │   │   └── views.py
 │   ├── leads
 │   │   ├── __init__.py
 │   │   ├── admin.py
 │   │   ├── apps.py
+│   │   ├── filters.py
 │   │   ├── models.py
+│   │   ├── permissions.py
+│   │   ├── selectors.py
+│   │   ├── serializers.py
+│   │   ├── services.py
+│   │   ├── tests
+│   │   │   ├── __init__.py
+│   │   │   ├── factories.py
+│   │   │   ├── fixtures.py
+│   │   │   ├── test_lead_filters.py
+│   │   │   ├── test_lead_permissions.py
+│   │   │   └── test_leads.py
+│   │   ├── urls.py
 │   │   └── views.py
 │   ├── logs
 │   │   └── django.log
@@ -120,6 +189,7 @@
 │   │   ├── apps.py
 │   │   ├── models.py
 │   │   └── views.py
+│   ├── package-lock.json
 │   ├── requirements.txt
 │   ├── staff
 │   │   ├── __init__.py
@@ -141,7 +211,102 @@
 │   │   ├── urls.py
 │   │   └── views.py
 │   └── static
+├── frontend
+│   ├── README.md
+│   ├── components.json
+│   ├── eslint.config.js
+│   ├── index.html
+│   ├── package-lock.json
+│   ├── package.json
+│   ├── public
+│   │   ├── favicon.svg
+│   │   └── icons.svg
+│   ├── src
+│   │   ├── App.tsx
+│   │   ├── app
+│   │   │   ├── providers.tsx
+│   │   │   ├── public.tsx
+│   │   │   ├── router.tsx
+│   │   │   └── staff.tsx
+│   │   ├── assets
+│   │   │   ├── hero.png
+│   │   │   ├── react.svg
+│   │   │   └── vite.svg
+│   │   ├── components
+│   │   │   ├── layout
+│   │   │   │   ├── AppLogo.tsx
+│   │   │   │   ├── PageContainer.tsx
+│   │   │   │   ├── PageHeader.tsx
+│   │   │   │   ├── PublicFooter.tsx
+│   │   │   │   ├── PublicLayout.tsx
+│   │   │   │   └── staff
+│   │   │   │       ├── Footer.tsx
+│   │   │   │       ├── Header.tsx
+│   │   │   │       └── StaffMain.tsx
+│   │   │   ├── shared
+│   │   │   │   ├── AppErrorBoundary.tsx
+│   │   │   │   ├── EmptyState.tsx
+│   │   │   │   ├── ErrorState.tsx
+│   │   │   │   ├── FormError.tsx
+│   │   │   │   ├── LoadingPage.tsx
+│   │   │   │   ├── NotFound.tsx
+│   │   │   │   ├── PageSkeleton.tsx
+│   │   │   │   ├── PageTitle.tsx
+│   │   │   │   ├── Section.tsx
+│   │   │   │   ├── SubmitButton.tsx
+│   │   │   │   └── ThemeToggle.tsx
+│   │   │   └── ui
+│   │   │       ├── button.tsx
+│   │   │       ├── card.tsx
+│   │   │       ├── checkbox.tsx
+│   │   │       ├── dropdown-menu.tsx
+│   │   │       ├── input.tsx
+│   │   │       ├── skeleton.tsx
+│   │   │       ├── sonner.tsx
+│   │   │       └── textarea.tsx
+│   │   ├── config
+│   │   │   ├── api.ts
+│   │   │   └── routes.ts
+│   │   ├── contexts
+│   │   │   ├── AuthContext.test.tsx
+│   │   │   └── AuthContext.tsx
+│   │   ├── features
+│   │   │   └── auth
+│   │   │       ├── api
+│   │   │       │   ├── login.ts
+│   │   │       │   ├── me.ts
+│   │   │       │   └── refresh.ts
+│   │   │       ├── components
+│   │   │       │   ├── LoginForm.test.tsx
+│   │   │       │   └── LoginForm.tsx
+│   │   │       ├── hooks
+│   │   │       │   ├── useLogin.ts
+│   │   │       │   ├── useLogout.ts
+│   │   │       │   └── useMe.ts
+│   │   │       ├── pages
+│   │   │       │   ├── DashboardPage.tsx
+│   │   │       │   ├── LoginPage.test.tsx
+│   │   │       │   └── LoginPage.tsx
+│   │   │       ├── schemas
+│   │   │       │   └── loginSchema.ts
+│   │   │       ├── types.ts
+│   │   │       └── utils
+│   │   │           └── token.ts
+│   │   ├── index.css
+│   │   ├── lib
+│   │   │   ├── axios.ts
+│   │   │   ├── query-client.ts
+│   │   │   └── utils.ts
+│   │   ├── main.tsx
+│   │   └── routes
+│   │       ├── GuestRoute.tsx
+│   │       ├── ProtectedRoute.test.tsx
+│   │       └── ProtectedRoute.tsx
+│   ├── tsconfig.app.json
+│   ├── tsconfig.json
+│   ├── tsconfig.node.json
+│   └── vite.config.ts
 ├── project_structure.txt
 └── pytest.ini
 
-24 directories, 121 files
+52 directories, 258 files

@@ -33,7 +33,7 @@ class TestAttachmentFilterUploadedBy:
         )
 
         assert response.status_code == status.HTTP_200_OK
-        assert len(response.data) == 1
+        assert len(response.data["results"]) == 1
 
 
 class TestAttachmentFilterContentType:
@@ -64,7 +64,7 @@ class TestAttachmentFilterContentType:
         )
 
         assert response.status_code == status.HTTP_200_OK
-        assert len(response.data) == 1
+        assert len(response.data["results"]) == 1
 
 
 class TestAttachmentFilterObjectId:
@@ -90,7 +90,7 @@ class TestAttachmentFilterObjectId:
         )
 
         assert response.status_code == status.HTTP_200_OK
-        assert len(response.data) == 1
+        assert len(response.data["results"]) == 1
 
 
 class TestAttachmentFilterGenericRelation:
@@ -121,7 +121,7 @@ class TestAttachmentFilterGenericRelation:
         )
 
         assert response.status_code == status.HTTP_200_OK
-        assert len(response.data) == 1
+        assert len(response.data["results"]) == 1
 
 
 class TestAttachmentCreatedAtFilter:
@@ -144,4 +144,4 @@ class TestAttachmentCreatedAtFilter:
         )
 
         assert response.status_code == status.HTTP_200_OK
-        assert len(response.data) == 1
+        assert len(response.data["results"]) == 1

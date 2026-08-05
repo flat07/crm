@@ -32,8 +32,8 @@ class TestCompanySearch:
         )
 
         assert response.status_code == status.HTTP_200_OK
-        assert len(response.data) == 1
-        assert response.data[0]["name"] == "Microsoft Corporation"
+        assert len(response.data["results"]) == 1
+        assert response.data["results"][0]["name"] == "Microsoft Corporation"
 
 
 class TestCompanyFilterName:
@@ -59,7 +59,7 @@ class TestCompanyFilterName:
         )
 
         assert response.status_code == status.HTTP_200_OK
-        assert len(response.data) == 1
+        assert len(response.data["results"]) == 1
 
 
 class TestCompanyFilterLegalName:
@@ -85,7 +85,7 @@ class TestCompanyFilterLegalName:
         )
 
         assert response.status_code == status.HTTP_200_OK
-        assert len(response.data) == 1
+        assert len(response.data["results"]) == 1
 
 
 class TestCompanyFilterLocation:
@@ -111,7 +111,7 @@ class TestCompanyFilterLocation:
         )
 
         assert response.status_code == status.HTTP_200_OK
-        assert len(response.data) == 1
+        assert len(response.data["results"]) == 1
 
     def test_filter_country_contains(
         self,
@@ -133,7 +133,7 @@ class TestCompanyFilterLocation:
         )
 
         assert response.status_code == status.HTTP_200_OK
-        assert len(response.data) == 1
+        assert len(response.data["results"]) == 1
 
 
 class TestCompanyFilterEmail:
@@ -159,7 +159,7 @@ class TestCompanyFilterEmail:
         )
 
         assert response.status_code == status.HTTP_200_OK
-        assert len(response.data) == 1
+        assert len(response.data["results"]) == 1
 
 
 class TestCompanyFilterIndustry:
@@ -185,7 +185,7 @@ class TestCompanyFilterIndustry:
         )
 
         assert response.status_code == status.HTTP_200_OK
-        assert len(response.data) == 1
+        assert len(response.data["results"]) == 1
 
 
 class TestCompanyFilterType:
@@ -211,7 +211,7 @@ class TestCompanyFilterType:
         )
 
         assert response.status_code == status.HTTP_200_OK
-        assert len(response.data) == 1
+        assert len(response.data["results"]) == 1
 
 
 class TestCompanyFilterSize:
@@ -237,7 +237,7 @@ class TestCompanyFilterSize:
         )
 
         assert response.status_code == status.HTTP_200_OK
-        assert len(response.data) == 1
+        assert len(response.data["results"]) == 1
 
 
 class TestCompanyFilterOwner:
@@ -263,7 +263,7 @@ class TestCompanyFilterOwner:
         )
 
         assert response.status_code == status.HTTP_200_OK
-        assert len(response.data) == 1
+        assert len(response.data["results"]) == 1
 
 
 class TestCompanyFilterCreatedBy:
@@ -289,7 +289,7 @@ class TestCompanyFilterCreatedBy:
         )
 
         assert response.status_code == status.HTTP_200_OK
-        assert len(response.data) == 1
+        assert len(response.data["results"]) == 1
 
 
 class TestCompanyFilterDates:
@@ -351,7 +351,7 @@ class TestCompanyFilterActive:
         )
 
         assert response.status_code == status.HTTP_200_OK
-        assert len(response.data) == 1
+        assert len(response.data["results"]) == 1
 
 
 class TestCompanyOrdering:
@@ -377,4 +377,4 @@ class TestCompanyOrdering:
         )
 
         assert response.status_code == status.HTTP_200_OK
-        assert response.data[0]["name"] == "Alpha Company"
+        assert response.data["results"][0]["name"] == "Alpha Company"

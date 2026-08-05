@@ -35,8 +35,8 @@ class TestLeadSearch:
         )
 
         assert response.status_code == status.HTTP_200_OK
-        assert len(response.data) == 1
-        assert response.data[0]["title"] == "Enterprise CRM Implementation"
+        assert len(response.data["results"]) == 1
+        assert response.data["results"][0]["title"] == "Enterprise CRM Implementation"
 
 
 class TestLeadFilterStatus:
@@ -62,8 +62,8 @@ class TestLeadFilterStatus:
         )
 
         assert response.status_code == status.HTTP_200_OK
-        assert len(response.data) == 1
-        assert response.data[0]["status"] == LeadStatus.NEW
+        assert len(response.data["results"]) == 1
+        assert response.data["results"][0]["status"] == LeadStatus.NEW
 
 
 class TestLeadFilterSource:
@@ -89,8 +89,8 @@ class TestLeadFilterSource:
         )
 
         assert response.status_code == status.HTTP_200_OK
-        assert len(response.data) == 1
-        assert response.data[0]["source"] == LeadSource.WEBSITE
+        assert len(response.data["results"]) == 1
+        assert response.data["results"][0]["source"] == LeadSource.WEBSITE
 
 
 class TestLeadFilterCompany:
@@ -116,7 +116,7 @@ class TestLeadFilterCompany:
         )
 
         assert response.status_code == status.HTTP_200_OK
-        assert len(response.data) == 1
+        assert len(response.data["results"]) == 1
 
 
 class TestLeadFilterContact:
@@ -142,7 +142,7 @@ class TestLeadFilterContact:
         )
 
         assert response.status_code == status.HTTP_200_OK
-        assert len(response.data) == 1
+        assert len(response.data["results"]) == 1
 
 
 class TestLeadFilterOwner:
@@ -168,7 +168,7 @@ class TestLeadFilterOwner:
         )
 
         assert response.status_code == status.HTTP_200_OK
-        assert len(response.data) == 1
+        assert len(response.data["results"]) == 1
 
 
 class TestLeadFilterEstimatedValue:
@@ -194,7 +194,7 @@ class TestLeadFilterEstimatedValue:
         )
 
         assert response.status_code == status.HTTP_200_OK
-        assert len(response.data) == 1
+        assert len(response.data["results"]) == 1
 
     def test_filter_estimated_value_max(
         self,
@@ -216,7 +216,7 @@ class TestLeadFilterEstimatedValue:
         )
 
         assert response.status_code == status.HTTP_200_OK
-        assert len(response.data) == 1
+        assert len(response.data["results"]) == 1
 
 
 class TestLeadFilterProbability:
@@ -242,7 +242,7 @@ class TestLeadFilterProbability:
         )
 
         assert response.status_code == status.HTTP_200_OK
-        assert len(response.data) == 1
+        assert len(response.data["results"]) == 1
 
     def test_filter_probability_max(
         self,
@@ -264,7 +264,7 @@ class TestLeadFilterProbability:
         )
 
         assert response.status_code == status.HTTP_200_OK
-        assert len(response.data) == 1
+        assert len(response.data["results"]) == 1
 
 
 class TestLeadFilterDates:
@@ -290,7 +290,7 @@ class TestLeadFilterDates:
         )
 
         assert response.status_code == status.HTTP_200_OK
-        assert len(response.data) == 1
+        assert len(response.data["results"]) == 1
 
     def test_filter_expected_close_date_after(
         self,
@@ -312,7 +312,7 @@ class TestLeadFilterDates:
         )
 
         assert response.status_code == status.HTTP_200_OK
-        assert len(response.data) == 1
+        assert len(response.data["results"]) == 1
 
 
 class TestLeadOrdering:
@@ -339,7 +339,7 @@ class TestLeadOrdering:
 
         assert response.status_code == status.HTTP_200_OK
 
-        assert response.data[0]["estimated_value"] == "1000.00"
+        assert response.data["results"][0]["estimated_value"] == "1000.00"
 
     def test_order_by_created_desc(
         self,
@@ -357,6 +357,6 @@ class TestLeadOrdering:
 
         assert response.status_code == status.HTTP_200_OK
 
-        ids = [item["id"] for item in response.data]
+        ids = [item["id"] for item in response.data["results"]]
 
         assert ids.index(str(newer.id)) < ids.index(str(older.id))
