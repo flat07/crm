@@ -10,7 +10,7 @@ export interface RefreshResponse {
 
 export async function refreshToken(refresh: string) {
   const { data } = await axios.post<RefreshResponse>(
-    `${API_BASE_URL}/staff/auth/refresh/`,
+    `${API_BASE_URL}/auth/refresh/`,
     {
       refresh,
     },

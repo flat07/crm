@@ -246,13 +246,39 @@
 │   │   │   │       └── navigation.ts
 │   │   │   ├── shared
 │   │   │   │   ├── AppErrorBoundary.tsx
+│   │   │   │   ├── DataGrid
+│   │   │   │   │   ├── DataGrid.tsx
+│   │   │   │   │   ├── column.ts
+│   │   │   │   │   ├── components
+│   │   │   │   │   │   ├── GridActions.tsx
+│   │   │   │   │   │   ├── GridBody.tsx
+│   │   │   │   │   │   ├── GridDrawer.tsx
+│   │   │   │   │   │   ├── GridEmpty.tsx
+│   │   │   │   │   │   ├── GridError.tsx
+│   │   │   │   │   │   ├── GridHeader.tsx
+│   │   │   │   │   │   ├── GridLoading.tsx
+│   │   │   │   │   │   ├── GridPagination.tsx
+│   │   │   │   │   │   └── GridToolbar.tsx
+│   │   │   │   │   ├── hooks
+│   │   │   │   │   │   ├── useDebounce.ts
+│   │   │   │   │   │   ├── useDrawer.ts
+│   │   │   │   │   │   ├── useOrdering.ts
+│   │   │   │   │   │   ├── usePagination.ts
+│   │   │   │   │   │   └── useSearch.ts
+│   │   │   │   │   ├── index.ts
+│   │   │   │   │   ├── types.ts
+│   │   │   │   │   └── useDataGrid.ts
+│   │   │   │   ├── DeleteDialog.tsx
 │   │   │   │   ├── EmptyState.tsx
 │   │   │   │   ├── ErrorState.tsx
+│   │   │   │   ├── FilterBar.tsx
 │   │   │   │   ├── FormError.tsx
 │   │   │   │   ├── LoadingPage.tsx
 │   │   │   │   ├── NotFound.tsx
 │   │   │   │   ├── PageSkeleton.tsx
 │   │   │   │   ├── PageTitle.tsx
+│   │   │   │   ├── Pagination.tsx
+│   │   │   │   ├── SearchInput.tsx
 │   │   │   │   ├── Section.tsx
 │   │   │   │   ├── SubmitButton.tsx
 │   │   │   │   └── ThemeToggle.tsx
@@ -262,6 +288,8 @@
 │   │   │       ├── checkbox.tsx
 │   │   │       ├── dropdown-menu.tsx
 │   │   │       ├── input.tsx
+│   │   │       ├── label.tsx
+│   │   │       ├── sheet.tsx
 │   │   │       ├── skeleton.tsx
 │   │   │       ├── sonner.tsx
 │   │   │       └── textarea.tsx
@@ -271,41 +299,74 @@
 │   │   │   ├── AuthContext.test.tsx
 │   │   │   └── AuthContext.tsx
 │   │   ├── features
-│   │   │   └── auth
+│   │   │   ├── auth
+│   │   │   │   ├── api
+│   │   │   │   │   ├── login.ts
+│   │   │   │   │   ├── me.ts
+│   │   │   │   │   └── refresh.ts
+│   │   │   │   ├── components
+│   │   │   │   │   ├── LoginForm.test.tsx
+│   │   │   │   │   ├── LoginForm.tsx
+│   │   │   │   │   └── PermissionGuard.tsx
+│   │   │   │   ├── hooks
+│   │   │   │   │   ├── useLogin.ts
+│   │   │   │   │   ├── useLogout.ts
+│   │   │   │   │   ├── useMe.ts
+│   │   │   │   │   └── usePermissions.ts
+│   │   │   │   ├── pages
+│   │   │   │   │   ├── DashboardPage.tsx
+│   │   │   │   │   ├── LoginPage.test.tsx
+│   │   │   │   │   └── LoginPage.tsx
+│   │   │   │   ├── schemas
+│   │   │   │   │   └── loginSchema.ts
+│   │   │   │   ├── types.ts
+│   │   │   │   └── utils
+│   │   │   │       ├── permissions.ts
+│   │   │   │       └── token.ts
+│   │   │   └── companies
 │   │   │       ├── api
-│   │   │       │   ├── login.ts
-│   │   │       │   ├── me.ts
-│   │   │       │   └── refresh.ts
+│   │   │       │   ├── companyApi.ts
+│   │   │       │   └── companyMutations.ts
 │   │   │       ├── components
-│   │   │       │   ├── LoginForm.test.tsx
-│   │   │       │   ├── LoginForm.tsx
-│   │   │       │   └── PermissionGuard.tsx
+│   │   │       │   ├── CompanyForm.tsx
+│   │   │       │   ├── companyColumns.tsx
+│   │   │       │   └── companyFormSchema.ts
 │   │   │       ├── hooks
-│   │   │       │   ├── useLogin.ts
-│   │   │       │   ├── useLogout.ts
-│   │   │       │   ├── useMe.ts
-│   │   │       │   └── usePermissions.ts
+│   │   │       │   ├── useCompanies.ts
+│   │   │       │   ├── useCompanies2.ts
+│   │   │       │   ├── useCompany.ts
+│   │   │       │   ├── useCreateCompany.ts
+│   │   │       │   └── useDeleteCompany.ts
+│   │   │       ├── index.ts
 │   │   │       ├── pages
-│   │   │       │   ├── DashboardPage.tsx
-│   │   │       │   ├── LoginPage.test.tsx
-│   │   │       │   └── LoginPage.tsx
-│   │   │       ├── schemas
-│   │   │       │   └── loginSchema.ts
-│   │   │       ├── types.ts
-│   │   │       └── utils
-│   │   │           ├── permissions.ts
-│   │   │           └── token.ts
+│   │   │       │   └── CompaniesPage.tsx
+│   │   │       └── types.ts
+│   │   ├── hooks
+│   │   │   ├── useDataTable.ts
+│   │   │   ├── useDebounce.ts
+│   │   │   ├── useDocumentTitle.ts
+│   │   │   ├── usePagination.ts
+│   │   │   └── useTable.ts
 │   │   ├── index.css
 │   │   ├── lib
 │   │   │   ├── axios.ts
 │   │   │   ├── query-client.ts
+│   │   │   ├── queryKeys.ts
 │   │   │   └── utils.ts
 │   │   ├── main.tsx
-│   │   └── routes
-│   │       ├── GuestRoute.tsx
-│   │       ├── ProtectedRoute.test.tsx
-│   │       ├── ProtectedRoute.tsx
-│   │       └── RequirePermission.tsx
+│   │   ├── routes
+│   │   │   ├── GuestRoute.tsx
+│   │   │   ├── ProtectedRoute.test.tsx
+│   │   │   ├── ProtectedRoute.tsx
+│   │   │   └── RequirePermission.tsx
+│   │   ├── types
+│   │   │   ├── api.ts
+│   │   │   ├── common.ts
+│   │   │   └── pagination.ts
+│   │   └── utils
+│   │       ├── dates.ts
+│   │       ├── filters.ts
+│   │       └── pagination.ts
 │   ├── tsconfig.app.json
 │   ├── tsconfig.json
 │   ├── tsconfig.node.json
@@ -313,4 +374,4 @@
 ├── project_structure.txt
 └── pytest.ini
 
-52 directories, 262 files
+63 directories, 312 files

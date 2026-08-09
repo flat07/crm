@@ -6,7 +6,7 @@ pytestmark = pytest.mark.django_db
 
 
 class TestLogin:
-    endpoint = "/api/v1/staff/auth/login/"
+    endpoint = "/api/v1/auth/login/"
 
     def test_login_success(self, api_client, sales_manager):
         response = api_client.post(
@@ -76,8 +76,8 @@ class TestLogin:
 
 
 class TestRefreshToken:
-    login = "/api/v1/staff/auth/login/"
-    refresh = "/api/v1/staff/auth/refresh/"
+    login = "/api/v1/auth/login/"
+    refresh = "/api/v1/auth/refresh/"
 
     def test_refresh_token(
         self,
@@ -122,7 +122,7 @@ class TestRefreshToken:
 
 
 class TestMe:
-    endpoint = "/api/v1/staff/auth/me/"
+    endpoint = "/api/v1/auth/me/"
 
     def test_authenticated_user(
         self,
@@ -146,7 +146,7 @@ class TestMe:
 
 
 class TestChangePassword:
-    endpoint = "/api/v1/staff/auth/change-password/"
+    endpoint = "/api/v1/auth/change-password/"
 
     def test_change_password(
         self,

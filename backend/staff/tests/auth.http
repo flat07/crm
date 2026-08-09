@@ -2,21 +2,21 @@
 
 ### Variables (Update these after logging in)
 @baseUrl = http://localhost:8000
-@accessToken = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzg1Nzc2Njc4LCJpYXQiOjE3ODU3NzU3NzgsImp0aSI6ImJjYjQ2ZmViNDYzYzQxN2ZhOTA1NTBhYWIxZWQ1OGUwIiwidXNlcl9pZCI6IjViYjI1NGIyLTZiM2ItNDIyZi05MTE2LTJiNTViYzFlNGNlYyJ9.worDptGaTZ0BJj_3AOJGEFmPA95mfAeN0djfqhOF5N4
+@accessToken = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzg1OTE5NDQ5LCJpYXQiOjE3ODU5MTg1NDksImp0aSI6ImMzZjQ0OGIyZTY4YTQ4YThhNmQyYzE4OWZjYmJhZjAwIiwidXNlcl9pZCI6IjViYjI1NGIyLTZiM2ItNDIyZi05MTE2LTJiNTViYzFlNGNlYyJ9.l6wdDIAJvCVPMH1TMqrDLcJxjDKliaRi0nRQALUJVYk
 @refreshToken = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoicmVmcmVzaCIsImV4cCI6MTc4MzQwMDIwMiwiaWF0IjoxNzgzMzEzODAyLCJqdGkiOiI2ZGE5NzViMDQ3N2Y0ZTgzYjNmZmU0NDZhMzMxYzM3YSIsInVzZXJfaWQiOiIxIn0.r8Qo_lHmEkwC6dZqGZOsjHBvkzW3DaNXzgZVkxmxfmw
 
 ### Register a new user
-POST {{baseUrl}}/api/auth/register/
+POST {{baseUrl}}/api/v1/auth/register/
 Content-Type: application/json
 
 {
     "username": "alisher",
     "email": "alisher@example.com",
-    "password": "password123"
+    "password": "password"
 }
 
 ### Login
-POST {{baseUrl}}/api/v1/staff/auth/login/
+POST {{baseUrl}}/api/v1/auth/login/
 Content-Type: application/json
 
 {
@@ -35,13 +35,18 @@ Content-Type: application/json
 {
     "refresh": "{{refreshToken}}"
 }
+### Get list of companies
+GET {{baseUrl}}/api/v1/companies/?page=1&search=&ordering=name
+Content-Type: application/json
+Authorization: Bearer {{accessToken}}
+
 ### Get list of contacts
-GET {{baseUrl}}//api/v1/contacts/
+GET {{baseUrl}}/api/v1/contacts/
 Content-Type: application/json
 Authorization: Bearer {{accessToken}}
 
 ### Get list of contact tags
-GET {{baseUrl}}//api/v1/contacts/tags
+GET {{baseUrl}}/api/v1/contacts/tags
 Content-Type: application/json
 Authorization: Bearer {{accessToken}}
 

@@ -3,6 +3,7 @@
 import { Button } from "@/components/ui/button";
 
 import { useAuth } from "@/contexts/AuthContext";
+import CompaniesPage from "@/features/companies/pages/CompaniesPage";
 import { useNavigate } from "react-router-dom";
 
 export default function DashboardPage() {
@@ -17,6 +18,7 @@ export default function DashboardPage() {
 
           <p>Welcome {user?.email}</p>
         </div>
+        <CompaniesPage />
 
         {/* Container for buttons */}
         <div className="flex flex-wrap gap-4">

@@ -24,27 +24,27 @@ router.register(
 
 urlpatterns = [
     path(
-        "auth/login/",
+        "login/",
         LoginView.as_view(),
         name="login",
     ),
     path(
-        "auth/refresh/",
+        "refresh/",
         TokenRefreshView.as_view(),
         name="refresh",
     ),
     path(
-        "auth/logout/",
+        "logout/",
         LogoutView.as_view(),
         name="logout",
     ),
     path(
-        "auth/me/",
+        "me/",
         MeView.as_view(),
         name="me",
     ),
     path(
-        "auth/change-password/",
+        "change-password/",
         ChangePasswordView.as_view(),
         name="change-password",
     ),
@@ -52,12 +52,12 @@ urlpatterns = [
 
 urlpatterns += router.urls
 
-# /api/v1/staff/users/
-# /api/v1/staff/auth/change-password/
-# /api/v1/staff/auth/me/
-# /api/v1/staff/auth/refresh/
-# /api/v1/staff/auth/logout/
-# /api/v1/staff/auth/login/
+# /api/v1/auth/users/
+# /api/v1/auth/auth/change-password/
+# /api/v1/auth/auth/me/
+# /api/v1/auth/auth/refresh/
+# /api/v1/auth/auth/logout/
+# /api/v1/auth/auth/login/
 # {
 #   "refresh": "",
 #   "access": ""

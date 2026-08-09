@@ -5,7 +5,7 @@ import { api } from "@/lib/axios";
 import type { LoginRequest, LoginResponse } from "../types";
 
 export async function login(payload: LoginRequest) {
-  const { data } = await api.post<LoginResponse>("/staff/auth/login/", payload);
+  const { data } = await api.post<LoginResponse>("/auth/login/", payload);
 
   return data;
 }

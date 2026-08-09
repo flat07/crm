@@ -27,7 +27,7 @@ urlpatterns = [
         include("attachments.urls"),
     ),
     path(
-        "staff/",
+        "auth/",
         include("staff.urls"),
     ),
 ]

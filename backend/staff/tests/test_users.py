@@ -9,7 +9,7 @@ pytestmark = pytest.mark.django_db
 
 
 class TestUserList:
-    endpoint = "/api/v1/staff/users/"
+    endpoint = "/api/v1/auth/users/"
 
     def test_returns_users(
         self,
@@ -31,14 +31,14 @@ class TestUserRetrieve:
     ):
         user = UserFactory()
 
-        response = auth_admin.get(f"/api/v1/staff/users/{user.id}/")
+        response = auth_admin.get(f"/api/v1/auth/users/{user.id}/")
 
         assert response.status_code == status.HTTP_200_OK
         assert response.data["id"] == str(user.id)
 
 
 class TestUserCreate:
-    endpoint = "/api/v1/staff/users/"
+    endpoint = "/api/v1/auth/users/"
 
     def test_creates_user(
         self,
@@ -70,7 +70,7 @@ class TestUserUpdate:
         user = UserFactory()
 
         response = auth_admin.patch(
-            f"/api/v1/staff/users/{user.id}/",
+            f"/api/v1/auth/users/{user.id}/",
             {
                 "first_name": "Updated",
             },
@@ -91,7 +91,7 @@ class TestUserDelete:
     ):
         user = UserFactory()
 
-        response = auth_admin.delete(f"/api/v1/staff/users/{user.id}/")
+        response = auth_admin.delete(f"/api/v1/auth/users/{user.id}/")
 
         assert response.status_code == status.HTTP_204_NO_CONTENT
 
@@ -99,7 +99,7 @@ class TestUserDelete:
 
 
 class TestPermissions:
-    endpoint = "/api/v1/staff/users/"
+    endpoint = "/api/v1/auth/users/"
 
     def test_anonymous_cannot_access(
         self,
