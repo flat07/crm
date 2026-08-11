@@ -3,7 +3,6 @@
 import { Button } from "@/components/ui/button";
 
 import { useAuth } from "@/contexts/AuthContext";
-import CompaniesPage from "@/features/companies/pages/CompaniesPage";
 import { useNavigate } from "react-router-dom";
 
 export default function DashboardPage() {
@@ -18,28 +17,14 @@ export default function DashboardPage() {
 
           <p>Welcome {user?.email}</p>
         </div>
-        <CompaniesPage />
 
         {/* Container for buttons */}
         <div className="flex flex-wrap gap-4">
-          <Button
-            variant="outline"
-            onClick={() => navigate("/staff/housekeeping")}
-          >
-            Go to Housekeeping
+          <Button variant="outline" onClick={() => navigate("/companies")}>
+            Go to Companies
           </Button>
-          <Button
-            variant="outline"
-            onClick={() => navigate("/staff/engineering")}
-          >
-            Go to Engineering
-          </Button>
-
-          <Button
-            variant="outline"
-            onClick={() => navigate("/staff/room-service")}
-          >
-            Go to Room Service
+          <Button variant="outline" onClick={() => navigate("/deals")}>
+            Go to Deals
           </Button>
         </div>
       </div>

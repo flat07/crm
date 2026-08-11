@@ -88,7 +88,7 @@ class DealViewSet(viewsets.ModelViewSet):
         methods=["post"],
     )
     def restore(self, request, pk=None):
-        deal = self.get_object()
+        deal = selectors.deal_detail_with_deleted(pk)
 
         services.restore(
             deal=deal,
@@ -112,4 +112,38 @@ class DealViewSet(viewsets.ModelViewSet):
 
         return response.Response(
             status=status.HTTP_204_NO_CONTENT,
+        )
+
+    def create(self, request, *args, **kwargs):
+        print("\n========== CREATE DEAL ==========")
+        print("REQUEST DATA:", request.data)
+
+        serializer = self.get_serializer(data=request.data)
+
+        print("SERIALIZER BEFORE VALIDATION:", serializer)
+
+        if not serializer.is_valid():
+            print("❌ SERIALIZER ERRORS:")
+            print(serializer.errors)
+
+            return response.Response(
+                serializer.errors,
+                status=status.HTTP_400_BAD_REQUEST,
+            )
+
+        print("✅ VALIDATED DATA:")
+        print(serializer.validated_data)
+
+        self.perform_create(serializer)
+
+        print("✅ CREATED DEAL:")
+        print(serializer.data)
+        print("=================================\n")
+
+        headers = self.get_success_headers(serializer.data)
+
+        return response.Response(
+            serializer.data,
+            status=status.HTTP_201_CREATED,
+            headers=headers,
         )

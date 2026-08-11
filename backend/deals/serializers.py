@@ -6,6 +6,13 @@ from .models import Deal
 
 
 class DealSerializer(serializers.ModelSerializer):
+    company_name = serializers.CharField(
+        source="company.name",
+        read_only=True,
+    )
+    contact_name = serializers.SerializerMethodField()
+    owner_name = serializers.SerializerMethodField()
+
     class Meta:
         model = Deal
 
@@ -13,8 +20,11 @@ class DealSerializer(serializers.ModelSerializer):
             "id",
             "lead",
             "company",
+            "company_name",
             "contact",
+            "contact_name",
             "owner",
+            "owner_name",
             "stage",
             "amount",
             "probability",
@@ -31,6 +41,18 @@ class DealSerializer(serializers.ModelSerializer):
             "created_at",
             "updated_at",
         )
+
+    def get_contact_name(self, obj):
+        if not obj.contact:
+            return None
+
+        return obj.contact.full_name
+
+    def get_owner_name(self, obj):
+        if not obj.owner:
+            return None
+
+        return obj.owner.get_full_name()
 
     def create(self, validated_data):
         from .services import create_deal

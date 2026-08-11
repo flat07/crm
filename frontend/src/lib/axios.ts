@@ -20,6 +20,11 @@ export const api = axios.create({
 });
 
 api.interceptors.request.use((config) => {
+  console.log("🚀 AXIOS REQUEST");
+  console.log("URL:", config.url);
+  console.log("METHOD:", config.method);
+  console.log("DATA:", config.data);
+
   const token = getAccessToken();
 
   const isPublic = config.url?.startsWith("/public/");
@@ -50,18 +55,34 @@ function processQueue(error: unknown, token?: string) {
 }
 
 api.interceptors.response.use(
-  (response) => response,
+  (response) => {
+    console.log("✅ AXIOS RESPONSE");
+    console.log("STATUS:", response.status);
+    console.log("URL:", response.config.url);
+    console.log("DATA:", response.data);
+
+    return response;
+  },
 
   async (error) => {
+    console.log("🔥🔥🔥 AXIOS RESPONSE ERROR 🔥🔥🔥");
+
+    console.log("ERROR:", error);
+    console.log("STATUS:", error.response?.status);
+    console.log("URL:", error.config?.url);
+    console.log("DATA:", error.response?.data);
     const original = error.config;
 
     if (error.response?.status !== 401 || original._retry) {
+      console.log("➡️ NOT A 401 — REJECTING ERROR BACK TO CALLER");
       return Promise.reject(error);
     }
+    console.log("🔐 401 — starting token refresh");
 
     original._retry = true;
 
     if (isRefreshing) {
+      console.log("⏳ Token refresh already running");
       return new Promise((resolve, reject) => {
         queue.push({
           resolve: (token) => {
@@ -77,13 +98,16 @@ api.interceptors.response.use(
     isRefreshing = true;
 
     try {
+      console.log("🔄 Refreshing access token...");
       const refresh = getRefreshToken();
 
       if (!refresh) {
+        console.log("❌ No refresh token");
         throw error;
       }
 
       const data = await refreshToken(refresh);
+      console.log("✅ Token refreshed");
 
       setAccessToken(data.access);
 
@@ -93,6 +117,7 @@ api.interceptors.response.use(
 
       return api(original);
     } catch (err) {
+      console.log("❌ Token refresh failed:", err);
       processQueue(err);
 
       clearTokens();

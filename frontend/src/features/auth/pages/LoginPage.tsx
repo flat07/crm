@@ -1,8 +1,8 @@
 // frontend/src/features/auth/pages/LoginPage.tsx
 
-import { Navigate } from "react-router-dom";
-
 import { Card, CardContent } from "@/components/ui/card";
+import { Navigate } from "react-router-dom";
+import { toast } from "sonner";
 
 import { useAuth } from "@/contexts/AuthContext";
 
@@ -15,9 +15,24 @@ export default function LoginPage() {
   const auth = useAuth();
 
   async function handleSubmit(values: { email: string; password: string }) {
-    const tokens = await mutation.mutateAsync(values);
+    try {
+      const tokens = await mutation.mutateAsync(values);
 
-    await auth.login(tokens.access, tokens.refresh);
+      await auth.login(tokens.access, tokens.refresh);
+      // console.log("DEBUG: LoginPage ");
+      // 2. Success toast notification
+      toast.success("Welcome back!", {
+        description: "You have logged in successfully.",
+      });
+    } catch (error: any) {
+      // 3. Error toast notification
+      toast.error("Login failed", {
+        description:
+          error?.response?.data?.message ||
+          error?.message ||
+          "Please check your credentials and try again.",
+      });
+    }
   }
 
   if (auth.isAuthenticated) {
