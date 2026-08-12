@@ -1,7 +1,7 @@
 // frontend/src/features/leads/api/leadsApi.ts
 import { api } from "@/lib/axios";
 import type { PaginatedResponse } from "@/types/api";
-import type { Lead, LeadStatus } from "../types";
+import type { Lead, LeadSource, LeadStatus } from "../types";
 
 export interface LeadListParams {
   page?: number;
@@ -31,15 +31,15 @@ export interface LeadListParams {
 
 export interface CreateLeadData {
   title: string;
-  company?: number | null;
-  contact?: number | null;
-  source?: string;
+  company?: string | null;
+  contact?: string | null;
+  source?: LeadSource | null;
   status?: LeadStatus | string;
   estimated_value?: string | number | null;
   probability?: number;
   expected_close_date?: string | null; // ISO date string
-  owner?: number | null;
-  description?: string;
+  owner?: string | null;
+  description?: string | null;
   is_active?: boolean;
 }
 
@@ -58,7 +58,7 @@ export async function getLeads(params: LeadListParams = {}) {
 /**
  * Get a single lead by ID
  */
-export async function getLead(id: number) {
+export async function getLead(id: string) {
   const { data } = await api.get<Lead>(`/leads/${id}/`);
   return data;
 }
@@ -74,7 +74,7 @@ export async function createLead(leadData: CreateLeadData) {
 /**
  * Update an existing lead
  */
-export async function updateLead(id: number, leadData: UpdateLeadData) {
+export async function updateLead(id: string, leadData: UpdateLeadData) {
   const { data } = await api.patch<Lead>(`/leads/${id}/`, leadData);
   return data;
 }
@@ -82,14 +82,14 @@ export async function updateLead(id: number, leadData: UpdateLeadData) {
 /**
  * Delete/archive a lead (soft delete)
  */
-export async function deleteLead(id: number) {
+export async function deleteLead(id: string) {
   await api.delete(`/leads/${id}/`);
 }
 
 /**
  * Restore an archived lead
  */
-export async function restoreLead(id: number) {
+export async function restoreLead(id: string) {
   const { data } = await api.post<Lead>(`/leads/${id}/restore/`);
   return data;
 }
@@ -97,7 +97,7 @@ export async function restoreLead(id: number) {
 /**
  * Permanently delete a lead (hard delete)
  */
-export async function hardDeleteLead(id: number) {
+export async function hardDeleteLead(id: string) {
   await api.delete(`/leads/${id}/hard_delete/`);
 }
 
@@ -105,7 +105,7 @@ export async function hardDeleteLead(id: number) {
  * Convert a lead to a deal
  */
 export async function convertLeadToDeal(
-  id: number,
+  id: string,
   dealData?: {
     stage?: string;
     amount?: string | number;

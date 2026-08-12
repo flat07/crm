@@ -25,10 +25,18 @@ export function column<TData>({
       cell ??
       (({ row }) => {
         const value = row.getValue(accessorKey as string);
-        // Return the value or empty string if null/undefined
-        return value ?? "";
+
+        if (value == null) {
+          return "";
+        }
+
+        if (typeof value === "boolean") {
+          return value ? "Yes" : "No";
+        }
+
+        return String(value);
       }),
-    enableSorting: false,
+    enableSorting: sortable,
     meta: {
       sortable,
       orderingField: accessorKey as string,

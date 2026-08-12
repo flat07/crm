@@ -10,6 +10,7 @@ import { PERMISSIONS } from "@/features/auth/utils/permissions";
 import CompaniesPage from "@/features/companies/pages/CompaniesPage";
 import ContactsPage from "@/features/contacts/pages/ContactsPage";
 import DealsPage from "@/features/deals/pages/DealsPage";
+import LeadsPage from "@/features/leads/pages/LeadsPage";
 
 export const staffRoutes = [
   {
@@ -53,6 +54,14 @@ export const staffRoutes = [
         element: (
           <RequirePermission permission={PERMISSIONS.CONTACT_VIEW}>
             <ContactsPage />
+          </RequirePermission>
+        ),
+      },
+      {
+        path: "/leads",
+        element: (
+          <RequirePermission permission={PERMISSIONS.CONTACT_VIEW}>
+            <LeadsPage />
           </RequirePermission>
         ),
       },

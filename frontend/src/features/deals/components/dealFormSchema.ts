@@ -1,3 +1,4 @@
+// frontend/src/features/deals/components/dealFormSchema.ts
 import { z } from "zod";
 
 // -----------------------------------------------------------------------------
@@ -6,11 +7,12 @@ import { z } from "zod";
 
 export const dealStageValues = [
   "prospecting",
-  "qualification",
+  "discovery",
   "proposal",
   "negotiation",
-  "closed_won",
-  "closed_lost",
+  "contract",
+  "won",
+  "lost",
 ] as const;
 
 // -----------------------------------------------------------------------------
@@ -19,11 +21,12 @@ export const dealStageValues = [
 
 export const dealStageOptions = [
   { value: "prospecting", label: "Prospecting" },
-  { value: "qualification", label: "Qualification" },
+  { value: "discovery", label: "Discovery" },
   { value: "proposal", label: "Proposal" },
   { value: "negotiation", label: "Negotiation" },
-  { value: "closed_won", label: "Closed Won" },
-  { value: "closed_lost", label: "Closed Lost" },
+  { value: "contract", label: "Contract" },
+  { value: "won", label: "Won" },
+  { value: "lost", label: "Lost" },
 ] as const;
 
 // -----------------------------------------------------------------------------

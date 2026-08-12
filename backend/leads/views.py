@@ -89,7 +89,7 @@ class LeadViewSet(viewsets.ModelViewSet):
         methods=["post"],
     )
     def restore(self, request, pk=None):
-        lead = self.get_object()
+        lead = selectors.lead_detail_with_deleted(pk)
 
         services.restore(
             lead=lead,

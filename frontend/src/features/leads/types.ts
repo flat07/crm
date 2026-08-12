@@ -15,33 +15,39 @@ export type LeadSource =
   | "other";
 
 export interface Lead {
-  id: number;
+  id: string;
   title: string;
-  company: number | null;
-  company_detail?: {
-    id: number;
-    name: string;
-  };
-  contact: number | null;
-  contact_detail?: {
-    id: number;
-    full_name: string;
-  };
+  company: LeadCompany | null;
+  company_name: string | null;
+  contact: LeadContact | null;
+  contact_name: string | null;
   source: LeadSource | null;
   status: LeadStatus;
   estimated_value: string | null; // Decimal field
   probability: number;
   expected_close_date: string | null; // ISO date string
-  owner: number | null;
-  owner_detail?: {
-    id: number;
-    full_name: string;
-    email: string;
-  };
+  owner: LeadOwner | null;
+  owner_name: string | null;
   description: string | null;
   is_active: boolean;
   created_at: string;
   updated_at: string;
+}
+export interface LeadCompany {
+  id: string | null;
+  name: string | null;
+}
+
+export interface LeadContact {
+  id: string | null;
+  first_name: string | null;
+  last_name: string | null;
+}
+
+export interface LeadOwner {
+  id: string | null;
+  first_name: string | null;
+  last_name: string | null;
 }
 
 export interface LeadFormData {
