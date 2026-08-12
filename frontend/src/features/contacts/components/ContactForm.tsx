@@ -34,8 +34,8 @@ const emptyValues: ContactFormValues = {
   mobile: "",
   contact_type: "",
   source: "",
-  company: null,
-  owner: null,
+  company_id: null,
+  owner_id: null,
   notes: "",
   birthday: "",
   linkedin_url: "",
@@ -80,8 +80,8 @@ export function ContactForm({
 
       source: (contact.source ?? "") as ContactFormValues["source"],
 
-      company: contact.company ? String(contact.company.id) : null,
-      owner: contact.owner ? String(contact.owner.id) : null,
+      company_id: contact.company ? String(contact.company.id) : null,
+      owner_id: contact.owner ? String(contact.owner.id) : null,
 
       notes: contact.notes ?? "",
       birthday: contact.birthday ?? "",
@@ -94,7 +94,14 @@ export function ContactForm({
 
   return (
     <form
-      onSubmit={onSubmit ? handleSubmit(onSubmit) : undefined}
+      onSubmit={
+        onSubmit
+          ? handleSubmit((values) => {
+              // console.log("CONTACT FORM VALUES:", values);
+              return onSubmit(values);
+            })
+          : undefined
+      }
       className="space-y-6"
     >
       {/* ------------------------------------------------------------------ */}
@@ -305,7 +312,7 @@ export function ContactForm({
           {/* Company */}
           <div className="space-y-1.5">
             <Controller
-              name="company"
+              name="company_id"
               control={control}
               render={({ field, fieldState }) => (
                 <EntityCombobox
@@ -316,7 +323,12 @@ export function ContactForm({
                     contact?.company?.name,
                   )}
                   onChange={(value) => {
+                    // console.log("COMPANY COMBOBOX VALUE:", value);
+                    // console.log("COMPANY FIELD BEFORE:", field.value);
+
                     field.onChange(value);
+
+                    // console.log("COMPANY FIELD AFTER:", value);
                   }}
                   searchFn={searchCompanies}
                   placeholder="Select company..."
@@ -327,9 +339,9 @@ export function ContactForm({
               )}
             />
 
-            {errors.company && (
+            {errors.company_id && (
               <p className="text-sm text-destructive">
-                {errors.company.message}
+                {errors.company_id.message}
               </p>
             )}
           </div>
@@ -337,7 +349,7 @@ export function ContactForm({
           {/* Owner */}
           <div className="space-y-1.5">
             <Controller
-              name="owner"
+              name="owner_id"
               control={control}
               render={({ field, fieldState }) => (
                 <EntityCombobox
@@ -359,8 +371,10 @@ export function ContactForm({
               )}
             />
 
-            {errors.owner && (
-              <p className="text-sm text-destructive">{errors.owner.message}</p>
+            {errors.owner_id && (
+              <p className="text-sm text-destructive">
+                {errors.owner_id.message}
+              </p>
             )}
           </div>
 

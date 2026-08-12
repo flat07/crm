@@ -64,13 +64,16 @@ export const contactFormSchema = z.object({
 
   source: z.enum(contactSourceValues).optional().or(z.literal("")),
 
-  company: z.string().uuid().nullable().optional(),
+  company_id: z.string().uuid().nullable().optional(),
 
-  owner: z.string().uuid().nullable().optional(),
+  owner_id: z.string().uuid().nullable().optional(),
 
   notes: z.string().optional().or(z.literal("")),
 
-  birthday: z.string().optional().or(z.literal("")),
+  birthday: z
+    .string()
+    .transform((value) => (value === "" ? null : value))
+    .nullable(),
 
   linkedin_url: z
     .string()

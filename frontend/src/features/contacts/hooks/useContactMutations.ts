@@ -26,12 +26,12 @@ export function useCreateContact() {
       queryClient.invalidateQueries({
         queryKey: ["contacts"],
       });
-      toast.success("Deal created successfully.");
+      toast.success("Contact created successfully.");
     },
     onError: (error) => {
       // console.log("🔥 MUTATION ERROR:", error);
 
-      toast.error("Unable to create deal", {
+      toast.error("Unable to create contact ", {
         description: getApiErrorMessage(error),
       });
     },
@@ -58,7 +58,7 @@ export function useUpdateContact() {
       queryClient.invalidateQueries({
         queryKey: queryKeys.contacts.all,
       });
-      toast.success("Deal updated successfully.");
+      toast.success("Contact updated successfully.");
 
       queryClient.setQueryData(["contacts", updatedContact.id], updatedContact);
     },
@@ -90,7 +90,7 @@ export function useDeleteContact() {
       queryClient.removeQueries({
         queryKey: queryKeys.contacts.detail(id),
       });
-      toast.success("Deal deleted successfully.");
+      toast.success("Contact deleted successfully.");
     },
   });
 }

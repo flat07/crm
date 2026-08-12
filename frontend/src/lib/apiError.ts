@@ -7,6 +7,32 @@ type DjangoErrorResponse = {
   [field: string]: unknown;
 };
 
+function getValidationErrorMessage(data: DjangoErrorResponse): string | null {
+  const messages: string[] = [];
+
+  for (const [field, value] of Object.entries(data)) {
+    if (field === "detail") {
+      continue;
+    }
+
+    if (Array.isArray(value)) {
+      for (const message of value) {
+        if (typeof message === "string") {
+          messages.push(`${field}: ${message}`);
+        }
+      }
+    } else if (typeof value === "string") {
+      messages.push(`${field}: ${value}`);
+    }
+  }
+
+  if (messages.length === 0) {
+    return null;
+  }
+
+  return messages.join("\n");
+}
+
 export function getApiErrorMessage(error: unknown): string {
   if (!axios.isAxiosError(error)) {
     return "Something went wrong. Please try again.";
@@ -21,12 +47,21 @@ export function getApiErrorMessage(error: unknown): string {
   const data = response.data as DjangoErrorResponse;
 
   if (response.status === 400) {
+    // Existing special case
     if (data.lead) {
       return "This lead already has a deal.";
     }
 
+    // DRF detail error
     if (typeof data.detail === "string") {
       return data.detail;
+    }
+
+    // DRF field validation errors
+    const validationMessage = getValidationErrorMessage(data);
+
+    if (validationMessage) {
+      return validationMessage;
     }
 
     return "Please check the information you entered.";

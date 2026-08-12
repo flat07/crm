@@ -73,6 +73,7 @@ export async function getContact(id: number) {
  */
 export async function createContact(contactData: CreateContactData) {
   const { data } = await api.post<Contact>("/contacts/", contactData);
+  // console.log("DEBUG: createContact: data ", data);
   return data;
 }
 
