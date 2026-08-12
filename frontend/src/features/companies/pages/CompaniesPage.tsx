@@ -65,7 +65,9 @@ export default function CompaniesPage() {
 
         if (mode === "view") {
           // console.log("🔍 [CompaniesPage] Rendering view mode");
-          return <CompanyForm company={company} readOnly />;
+          return (
+            <CompanyForm company={company} readOnly onSubmit={async () => {}} />
+          );
         }
 
         // console.log("🔍 [CompaniesPage] Rendering edit mode");

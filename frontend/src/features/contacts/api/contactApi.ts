@@ -14,9 +14,9 @@ export interface ContactListParams {
   phone?: string;
   mobile?: string;
   job_title?: string;
-  company?: number;
+  company?: string;
   company__name?: string;
-  owner?: number;
+  owner?: string;
   owner__first_name?: string;
   owner__last_name?: string;
   city?: string;
@@ -38,8 +38,8 @@ export interface CreateContactData {
   mobile?: string;
   contact_type?: string;
   source?: string;
-  company?: number;
-  owner?: number;
+  company?: string | null;
+  owner?: string | null;
   notes?: string;
   birthday?: string; // ISO date string
   linkedin_url?: string;
@@ -134,7 +134,7 @@ export async function searchContacts(search: string) {
 /**
  * Get contacts by company ID
  */
-export async function getContactsByCompany(companyId: number) {
+export async function getContactsByCompany(companyId: string) {
   return getContacts({
     company: companyId,
     page_size: 100, // Adjust as needed
@@ -144,7 +144,7 @@ export async function getContactsByCompany(companyId: number) {
 /**
  * Get contacts by owner ID
  */
-export async function getContactsByOwner(ownerId: number) {
+export async function getContactsByOwner(ownerId: string) {
   return getContacts({
     owner: ownerId,
     page_size: 100, // Adjust as needed

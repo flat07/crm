@@ -8,6 +8,7 @@ import DashboardPage from "@/features/auth/pages/DashboardPage";
 import LoginPage from "@/features/auth/pages/LoginPage";
 import { PERMISSIONS } from "@/features/auth/utils/permissions";
 import CompaniesPage from "@/features/companies/pages/CompaniesPage";
+import ContactsPage from "@/features/contacts/pages/ContactsPage";
 import DealsPage from "@/features/deals/pages/DealsPage";
 
 export const staffRoutes = [
@@ -34,7 +35,7 @@ export const staffRoutes = [
       {
         path: "/companies",
         element: (
-          <RequirePermission permission={PERMISSIONS.DASHBOARD_VIEW}>
+          <RequirePermission permission={PERMISSIONS.COMPANY_VIEW}>
             <CompaniesPage />
           </RequirePermission>
         ),
@@ -42,8 +43,16 @@ export const staffRoutes = [
       {
         path: "/deals",
         element: (
-          <RequirePermission permission={PERMISSIONS.DASHBOARD_VIEW}>
+          <RequirePermission permission={PERMISSIONS.DEAL_VIEW}>
             <DealsPage />
+          </RequirePermission>
+        ),
+      },
+      {
+        path: "/contacts",
+        element: (
+          <RequirePermission permission={PERMISSIONS.CONTACT_VIEW}>
+            <ContactsPage />
           </RequirePermission>
         ),
       },

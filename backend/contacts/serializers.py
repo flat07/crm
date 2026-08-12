@@ -12,6 +12,10 @@ from .models import (
 
 
 class ContactSerializer(serializers.ModelSerializer):
+    company_name = serializers.CharField(
+        source="company.name",
+        read_only=True,
+    )
     full_name = serializers.ReadOnlyField()
 
     class Meta:
@@ -28,6 +32,7 @@ class ContactSerializer(serializers.ModelSerializer):
             "contact_type",
             "source",
             "company",
+            "company_name",
             "owner",
             "notes",
             "birthday",

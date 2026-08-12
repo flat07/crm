@@ -15,6 +15,10 @@ export const queryKeys = {
 
   contacts: {
     all: ["contacts"] as const,
+    list: (page: number, search: string, ordering: string) =>
+      ["contacts", page, search, ordering] as const,
+
+    detail: (id: number) => ["contacts", id] as const,
   },
   deals: {
     all: ["deals"] as const,

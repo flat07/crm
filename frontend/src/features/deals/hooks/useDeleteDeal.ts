@@ -14,7 +14,7 @@ export function useDeleteDeal() {
     mutationFn: deleteDeal,
 
     onSuccess: async () => {
-      console.log("✅ DELETE DEAL SUCCESS");
+      // console.log("✅ DELETE DEAL SUCCESS");
 
       await queryClient.invalidateQueries({
         queryKey: queryKeys.deals.all,
@@ -24,7 +24,7 @@ export function useDeleteDeal() {
     },
 
     onError: (error) => {
-      console.error("🔥 DELETE DEAL ERROR:", error);
+      // console.error("🔥 DELETE DEAL ERROR:", error);
 
       toast.error("Unable to delete deal", {
         description: getApiErrorMessage(error),

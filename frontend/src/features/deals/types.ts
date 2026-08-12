@@ -1,14 +1,15 @@
+// frontend/src/features/deals/types.ts
 export interface Deal {
   id: number;
 
-  lead: number | null;
-  company: number | null;
+  lead: DealLead | null;
+  company: DealCompany | null;
   company_name: string | null;
 
-  contact: number | null;
+  contact: DealContact | null;
   contact_name: string | null;
 
-  owner: string | null;
+  owner: DealOwner | null;
   owner_name: string | null;
 
   stage: string;
@@ -25,4 +26,25 @@ export interface Deal {
 
   created_at: string;
   updated_at: string;
+}
+export interface DealLead {
+  id: number | null;
+  title: string | null;
+}
+
+export interface DealCompany {
+  id: number | null;
+  name: string | null;
+}
+
+export interface DealContact {
+  id: number | null;
+  first_name: string | null;
+  last_name: string | null;
+}
+
+export interface DealOwner {
+  id: number | null;
+  first_name: string | null;
+  last_name: string | null;
 }

@@ -5,6 +5,7 @@ import { useEffect } from "react";
 import { Controller, useForm } from "react-hook-form";
 
 import { EntityCombobox } from "@/components/shared/DataGrid/form";
+import { entityOption } from "@/components/shared/DataGrid/form/entityOption";
 
 import { searchCompanies } from "@/features/companies/api/companyEntitySearch";
 import { searchContacts } from "@/features/contacts/api/contactEntitySearch";
@@ -65,10 +66,10 @@ export function DealForm({ deal, onSubmit, readOnly = false }: DealFormProps) {
     }
 
     reset({
-      lead: deal.lead ? String(deal.lead) : null,
-      company: deal.company ? String(deal.company) : null,
-      contact: deal.contact ? String(deal.contact) : null,
-      owner: deal.owner ?? null,
+      lead: deal.lead ? String(deal.lead.id) : null,
+      company: deal.company ? String(deal.company.id) : null,
+      contact: deal.contact ? String(deal.contact.id) : null,
+      owner: deal.owner ? String(deal.owner.id) : null,
 
       stage: deal.stage as DealFormValues["stage"],
 
@@ -188,10 +189,6 @@ export function DealForm({ deal, onSubmit, readOnly = false }: DealFormProps) {
         <div className="grid grid-cols-2 gap-4">
           {/* Lead */}
           <div className="space-y-1.5">
-            <label htmlFor="lead" className="text-sm font-medium">
-              Lead ID
-            </label>
-
             <Controller
               name="lead"
               control={control}
@@ -199,6 +196,10 @@ export function DealForm({ deal, onSubmit, readOnly = false }: DealFormProps) {
                 <EntityCombobox
                   label="Lead"
                   value={field.value}
+                  selectedOption={entityOption(
+                    deal?.lead?.id,
+                    `${deal?.lead?.title ?? ""}`.trim(),
+                  )}
                   onChange={(value) => {
                     field.onChange(value);
                   }}
@@ -218,10 +219,6 @@ export function DealForm({ deal, onSubmit, readOnly = false }: DealFormProps) {
 
           {/* Company */}
           <div className="space-y-1.5">
-            <label htmlFor="company" className="text-sm font-medium">
-              Company ID
-            </label>
-
             <Controller
               name="company"
               control={control}
@@ -229,6 +226,10 @@ export function DealForm({ deal, onSubmit, readOnly = false }: DealFormProps) {
                 <EntityCombobox
                   label="Company"
                   value={field.value}
+                  selectedOption={entityOption(
+                    deal?.company?.id,
+                    deal?.company?.name,
+                  )}
                   onChange={(value) => {
                     field.onChange(value);
                   }}
@@ -250,10 +251,6 @@ export function DealForm({ deal, onSubmit, readOnly = false }: DealFormProps) {
 
           {/* Contact */}
           <div className="space-y-1.5">
-            <label htmlFor="contact" className="text-sm font-medium">
-              Contact ID
-            </label>
-
             <Controller
               name="contact"
               control={control}
@@ -261,6 +258,10 @@ export function DealForm({ deal, onSubmit, readOnly = false }: DealFormProps) {
                 <EntityCombobox
                   label="Contact"
                   value={field.value}
+                  selectedOption={entityOption(
+                    deal?.contact?.id,
+                    `${deal?.contact?.first_name ?? ""} ${deal?.contact?.last_name ?? ""}`.trim(),
+                  )}
                   onChange={(value) => {
                     field.onChange(value);
                   }}
@@ -282,10 +283,6 @@ export function DealForm({ deal, onSubmit, readOnly = false }: DealFormProps) {
 
           {/* Owner */}
           <div className="space-y-1.5">
-            <label htmlFor="owner" className="text-sm font-medium">
-              Owner ID
-            </label>
-
             <Controller
               name="owner"
               control={control}
@@ -293,6 +290,10 @@ export function DealForm({ deal, onSubmit, readOnly = false }: DealFormProps) {
                 <EntityCombobox
                   label="Owner"
                   value={field.value}
+                  selectedOption={entityOption(
+                    deal?.owner?.id,
+                    `${deal?.owner?.first_name ?? ""} ${deal?.owner?.last_name ?? ""}`.trim(),
+                  )}
                   onChange={(value) => {
                     field.onChange(value);
                   }}

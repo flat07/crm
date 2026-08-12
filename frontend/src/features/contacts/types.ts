@@ -11,8 +11,9 @@ export interface Contact {
   mobile: string | null;
   contact_type: string | null;
   source: string | null;
-  company: number | null;
-  owner: number | null;
+  company: string | null;
+  company_name: string | null;
+  owner: string | null;
   notes: string | null;
   birthday: string | null; // ISO date string
   linkedin_url: string | null;
@@ -32,8 +33,9 @@ export interface ContactFormData {
   mobile?: string;
   contact_type?: string;
   source?: string;
-  company?: number | null;
-  owner?: number | null;
+  company?: string | null;
+  company_name?: string | null;
+  owner?: string | null;
   notes?: string;
   birthday?: string;
   linkedin_url?: string;

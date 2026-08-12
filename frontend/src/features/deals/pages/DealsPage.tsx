@@ -28,7 +28,7 @@ export default function DealsPage() {
         delete: true,
 
         onDelete: async (deal) => {
-          deleteDealMutation.mutate(deal.id);
+          deleteDealMutation.mutate(String(deal.id));
         },
       }}
       onCreate={(onSuccess) => {
@@ -50,7 +50,7 @@ export default function DealsPage() {
         }
 
         if (mode === "view") {
-          return <DealForm deal={deal} readOnly />;
+          return <DealForm deal={deal} readOnly onSubmit={async () => {}} />;
         }
 
         return (

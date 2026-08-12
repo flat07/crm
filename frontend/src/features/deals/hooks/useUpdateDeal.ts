@@ -17,10 +17,10 @@ export function useUpdateDeal() {
     }: {
       id: number;
       values: Parameters<typeof updateDeal>[1];
-    }) => updateDeal(id, values),
+    }) => updateDeal(String(id), values),
 
     onSuccess: async () => {
-      console.log("✅ UPDATE DEAL SUCCESS");
+      // console.log("✅ UPDATE DEAL SUCCESS");
 
       await queryClient.invalidateQueries({
         queryKey: queryKeys.deals.all,
@@ -30,7 +30,7 @@ export function useUpdateDeal() {
     },
 
     onError: (error) => {
-      console.error("🔥 UPDATE DEAL ERROR:", error);
+      // console.error("🔥 UPDATE DEAL ERROR:", error);
 
       toast.error("Unable to update deal", {
         description: getApiErrorMessage(error),
