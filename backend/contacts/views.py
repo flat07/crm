@@ -109,7 +109,7 @@ class ContactViewSet(viewsets.ModelViewSet):
         methods=["post"],
     )
     def restore(self, request, pk=None):
-        contact = self.get_object()
+        contact = selectors.contact_detail_with_deleted(pk)
 
         services.restore(
             contact=contact,

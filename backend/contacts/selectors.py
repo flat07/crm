@@ -12,27 +12,55 @@ from .models import (
 
 
 def contact_list() -> QuerySet[Contact]:
-    return Contact.objects.select_related(
-        "company",
-        "owner",
-    ).prefetch_related(
-        Prefetch(
-            "emails",
-            queryset=ContactEmail.objects.order_by("-is_primary"),
-        ),
-        Prefetch(
-            "phones",
-            queryset=ContactPhone.objects.order_by("-is_primary"),
-        ),
-        Prefetch(
-            "tag_assignments",
-            queryset=ContactTagAssignment.objects.select_related("tag"),
-        ),
+    return (
+        Contact.objects.filter(deleted_at__isnull=True)
+        .select_related(
+            "company",
+            "owner",
+        )
+        .prefetch_related(
+            Prefetch(
+                "emails",
+                queryset=ContactEmail.objects.order_by("-is_primary"),
+            ),
+            Prefetch(
+                "phones",
+                queryset=ContactPhone.objects.order_by("-is_primary"),
+            ),
+            Prefetch(
+                "tag_assignments",
+                queryset=ContactTagAssignment.objects.select_related("tag"),
+            ),
+        )
     )
 
 
 def contact_detail(contact_id: int) -> Contact:
     return contact_list().get(pk=contact_id)
+
+
+def contact_detail_with_deleted(contact_id) -> Contact:
+    return (
+        Contact.objects.select_related(
+            "company",
+            "owner",
+        )
+        .prefetch_related(
+            Prefetch(
+                "emails",
+                queryset=ContactEmail.objects.order_by("-is_primary"),
+            ),
+            Prefetch(
+                "phones",
+                queryset=ContactPhone.objects.order_by("-is_primary"),
+            ),
+            Prefetch(
+                "tag_assignments",
+                queryset=ContactTagAssignment.objects.select_related("tag"),
+            ),
+        )
+        .get(pk=contact_id)
+    )
 
 
 def contact_tag_list():
