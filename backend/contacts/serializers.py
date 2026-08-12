@@ -1,6 +1,10 @@
 # backend/contacts/serializers.py
 
+from companies.models import Company
+from companies.serializers import CompanyBriefSerializer
 from rest_framework import serializers
+from staff.models import User
+from staff.serializers import StaffBriefSerializer
 
 from .models import (
     Contact,
@@ -11,7 +15,34 @@ from .models import (
 )
 
 
+class ContactBriefSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Contact
+        fields = (
+            "id",
+            "first_name",
+            "last_name",
+        )
+
+
 class ContactSerializer(serializers.ModelSerializer):
+    company = CompanyBriefSerializer(read_only=True)
+    owner = StaffBriefSerializer(read_only=True)
+    company_id = serializers.PrimaryKeyRelatedField(
+        source="company",
+        queryset=Company.objects.all(),
+        write_only=True,
+        required=False,
+        allow_null=True,
+    )
+
+    owner_id = serializers.PrimaryKeyRelatedField(
+        source="owner",
+        queryset=User.objects.all(),
+        write_only=True,
+        required=False,
+        allow_null=True,
+    )
     company_name = serializers.CharField(
         source="company.name",
         read_only=True,
@@ -32,8 +63,10 @@ class ContactSerializer(serializers.ModelSerializer):
             "contact_type",
             "source",
             "company",
+            "company_id",
             "company_name",
             "owner",
+            "owner_id",
             "notes",
             "birthday",
             "linkedin_url",

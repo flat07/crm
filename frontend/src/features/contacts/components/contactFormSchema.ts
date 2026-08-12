@@ -5,7 +5,12 @@ import { z } from "zod";
 // Contact choices
 // -----------------------------------------------------------------------------
 
-export const contactTypeValues = ["individual", "business"] as const;
+export const contactTypeValues = [
+  "customer",
+  "lead",
+  "partner",
+  "vendor",
+] as const;
 
 export const contactSourceValues = [
   "website",
@@ -22,8 +27,10 @@ export const contactSourceValues = [
 // -----------------------------------------------------------------------------
 
 export const contactTypeOptions = [
-  { value: "individual", label: "Individual" },
-  { value: "business", label: "Business" },
+  { value: "customer", label: "Customer" },
+  { value: "lead", label: "Lead" },
+  { value: "partner", label: "Partner" },
+  { value: "vendor", label: "Vendor" },
 ] as const;
 
 export const contactSourceOptions = [

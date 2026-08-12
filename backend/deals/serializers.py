@@ -1,50 +1,16 @@
 # backend/deals/serializers.py
 
 from companies.models import Company
+from companies.serializers import CompanyBriefSerializer
 from contacts.models import Contact
+from contacts.serializers import ContactBriefSerializer
 from leads.models import Lead
+from leads.serializers import LeadBriefSerializer
 from rest_framework import serializers
 from staff.models import User
+from staff.serializers import StaffBriefSerializer
 
 from .models import Deal
-
-
-class StaffBriefSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = User
-        fields = (
-            "id",
-            "first_name",
-            "last_name",
-        )
-
-
-class LeadBriefSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = Lead
-        fields = (
-            "id",
-            "title",
-        )
-
-
-class ContactBriefSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = Contact
-        fields = (
-            "id",
-            "first_name",
-            "last_name",
-        )
-
-
-class CompanyBriefSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = Company
-        fields = (
-            "id",
-            "name",
-        )
 
 
 class DealSerializer(serializers.ModelSerializer):

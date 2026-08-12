@@ -141,3 +141,13 @@ class UserUpdateSerializer(serializers.ModelSerializer):
         model = User
 
         exclude = ("password",)
+
+
+class StaffBriefSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = User
+        fields = (
+            "id",
+            "first_name",
+            "last_name",
+        )

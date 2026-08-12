@@ -11,9 +11,9 @@ export interface Contact {
   mobile: string | null;
   contact_type: string | null;
   source: string | null;
-  company: string | null;
+  company: ContactCompany | null;
   company_name: string | null;
-  owner: string | null;
+  owner: ContactOwner | null;
   notes: string | null;
   birthday: string | null; // ISO date string
   linkedin_url: string | null;
@@ -22,6 +22,15 @@ export interface Contact {
   country: string | null;
   created_at: string;
   updated_at: string;
+}
+export interface ContactCompany {
+  id: number | null;
+  name: string | null;
+}
+export interface ContactOwner {
+  id: number | null;
+  first_name: string | null;
+  last_name: string | null;
 }
 
 export interface ContactFormData {

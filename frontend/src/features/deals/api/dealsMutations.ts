@@ -10,12 +10,12 @@ export async function createDeal(values: DealFormValues) {
   try {
     const response = await api.post<Deal>("/deals/", values);
 
-    console.log("DEBUG: dealsMutations response:", response);
-    console.log("DEBUG: dealsMutations data:", response.data);
+    // console.log("DEBUG: dealsMutations response:", response);
+    // console.log("DEBUG: dealsMutations data:", response.data);
 
     return response.data;
   } catch (error) {
-    console.error("DEBUG: dealsMutations ERROR:", error);
+    // console.error("DEBUG: dealsMutations ERROR:", error);
 
     if (error instanceof Error) {
       console.error("DEBUG: dealsMutations message:", error.message);

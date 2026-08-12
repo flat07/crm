@@ -5,6 +5,15 @@ from rest_framework import serializers
 from companies.models import Company
 
 
+class CompanyBriefSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Company
+        fields = (
+            "id",
+            "name",
+        )
+
+
 class CompanySerializer(serializers.ModelSerializer):
     owner_name = serializers.CharField(
         source="owner.get_full_name",

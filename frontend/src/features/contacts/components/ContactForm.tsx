@@ -4,6 +4,7 @@ import { useEffect } from "react";
 import { Controller, useForm } from "react-hook-form";
 
 import { EntityCombobox } from "@/components/shared/DataGrid/form";
+import { entityOption } from "@/components/shared/DataGrid/form/entityOption";
 
 import { searchCompanies } from "@/features/companies/api/companyEntitySearch";
 import { searchStaff } from "@/features/staff/api/staffEntitySearch";
@@ -79,8 +80,8 @@ export function ContactForm({
 
       source: (contact.source ?? "") as ContactFormValues["source"],
 
-      company: contact.company ?? null,
-      owner: contact.owner ?? null,
+      company: contact.company ? String(contact.company.id) : null,
+      owner: contact.owner ? String(contact.owner.id) : null,
 
       notes: contact.notes ?? "",
       birthday: contact.birthday ?? "",
@@ -310,6 +311,10 @@ export function ContactForm({
                 <EntityCombobox
                   label="Company"
                   value={field.value}
+                  selectedOption={entityOption(
+                    contact?.company?.id,
+                    contact?.company?.name,
+                  )}
                   onChange={(value) => {
                     field.onChange(value);
                   }}
@@ -338,6 +343,10 @@ export function ContactForm({
                 <EntityCombobox
                   label="Owner"
                   value={field.value}
+                  selectedOption={entityOption(
+                    contact?.owner?.id,
+                    `${contact?.owner?.first_name ?? ""} ${contact?.owner?.last_name ?? ""}`.trim(),
+                  )}
                   onChange={(value) => {
                     field.onChange(value);
                   }}

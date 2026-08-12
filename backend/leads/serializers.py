@@ -5,6 +5,15 @@ from rest_framework import serializers
 from .models import Lead
 
 
+class LeadBriefSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Lead
+        fields = (
+            "id",
+            "title",
+        )
+
+
 class LeadSerializer(serializers.ModelSerializer):
     class Meta:
         model = Lead
