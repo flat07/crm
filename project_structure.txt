@@ -259,6 +259,12 @@
 │   │   │   │   │   │   ├── GridLoading.tsx
 │   │   │   │   │   │   ├── GridPagination.tsx
 │   │   │   │   │   │   └── GridToolbar.tsx
+│   │   │   │   │   ├── form
+│   │   │   │   │   │   ├── EntityCombobox.tsx
+│   │   │   │   │   │   ├── EntitySelect.tsx
+│   │   │   │   │   │   ├── entityOption.ts
+│   │   │   │   │   │   ├── index.ts
+│   │   │   │   │   │   └── types.ts
 │   │   │   │   │   ├── hooks
 │   │   │   │   │   │   ├── useDebounce.ts
 │   │   │   │   │   │   ├── useDrawer.ts
@@ -296,7 +302,6 @@
 │   │   ├── config
 │   │   │   └── api.ts
 │   │   ├── contexts
-│   │   │   ├── AuthContext.test.tsx
 │   │   │   └── AuthContext.tsx
 │   │   ├── features
 │   │   │   ├── auth
@@ -305,7 +310,6 @@
 │   │   │   │   │   ├── me.ts
 │   │   │   │   │   └── refresh.ts
 │   │   │   │   ├── components
-│   │   │   │   │   ├── LoginForm.test.tsx
 │   │   │   │   │   ├── LoginForm.tsx
 │   │   │   │   │   └── PermissionGuard.tsx
 │   │   │   │   ├── hooks
@@ -315,7 +319,6 @@
 │   │   │   │   │   └── usePermissions.ts
 │   │   │   │   ├── pages
 │   │   │   │   │   ├── DashboardPage.tsx
-│   │   │   │   │   ├── LoginPage.test.tsx
 │   │   │   │   │   └── LoginPage.tsx
 │   │   │   │   ├── schemas
 │   │   │   │   │   └── loginSchema.ts
@@ -323,23 +326,73 @@
 │   │   │   │   └── utils
 │   │   │   │       ├── permissions.ts
 │   │   │   │       └── token.ts
-│   │   │   └── companies
+│   │   │   ├── companies
+│   │   │   │   ├── api
+│   │   │   │   │   ├── companyApi.ts
+│   │   │   │   │   ├── companyEntitySearch.ts
+│   │   │   │   │   └── companyMutations.ts
+│   │   │   │   ├── components
+│   │   │   │   │   ├── CompanyForm.tsx
+│   │   │   │   │   ├── companyColumns.tsx
+│   │   │   │   │   └── companyFormSchema.ts
+│   │   │   │   ├── hooks
+│   │   │   │   │   ├── useCompanies.ts
+│   │   │   │   │   ├── useCompany.ts
+│   │   │   │   │   ├── useCreateCompany.ts
+│   │   │   │   │   └── useDeleteCompany.ts
+│   │   │   │   ├── index.ts
+│   │   │   │   ├── pages
+│   │   │   │   │   └── CompaniesPage.tsx
+│   │   │   │   └── types.ts
+│   │   │   ├── contacts
+│   │   │   │   ├── api
+│   │   │   │   │   ├── contactApi.ts
+│   │   │   │   │   └── contactEntitySearch.ts
+│   │   │   │   ├── components
+│   │   │   │   │   ├── ContactForm.tsx
+│   │   │   │   │   ├── contactColumns.tsx
+│   │   │   │   │   └── contactFormSchema.ts
+│   │   │   │   ├── hooks
+│   │   │   │   │   └── useContactMutations.ts
+│   │   │   │   ├── pages
+│   │   │   │   │   └── ContactsPage.tsx
+│   │   │   │   └── types.ts
+│   │   │   ├── deals
+│   │   │   │   ├── api
+│   │   │   │   │   ├── dealsApi.ts
+│   │   │   │   │   └── dealsMutations.ts
+│   │   │   │   ├── components
+│   │   │   │   │   ├── DealForm.tsx
+│   │   │   │   │   ├── dealColumns.tsx
+│   │   │   │   │   └── dealFormSchema.ts
+│   │   │   │   ├── hooks
+│   │   │   │   │   ├── useCreateDeal.ts
+│   │   │   │   │   ├── useDeal.ts
+│   │   │   │   │   ├── useDeals.ts
+│   │   │   │   │   ├── useDeleteDeal.ts
+│   │   │   │   │   └── useUpdateDeal.ts
+│   │   │   │   ├── pages
+│   │   │   │   │   └── DealsPage.tsx
+│   │   │   │   └── types.ts
+│   │   │   ├── leads
+│   │   │   │   ├── api
+│   │   │   │   │   ├── leadEntitySearch.ts
+│   │   │   │   │   └── leadsApi.ts
+│   │   │   │   ├── components
+│   │   │   │   │   ├── LeadForm.tsx
+│   │   │   │   │   ├── leadColumns.tsx
+│   │   │   │   │   └── leadFormSchema.ts
+│   │   │   │   ├── hooks
+│   │   │   │   │   ├── useCreateLead.ts
+│   │   │   │   │   ├── useDeleteLead.ts
+│   │   │   │   │   └── useUpdateLead.ts
+│   │   │   │   ├── pages
+│   │   │   │   │   └── LeadsPage.tsx
+│   │   │   │   └── types.ts
+│   │   │   └── staff
 │   │   │       ├── api
-│   │   │       │   ├── companyApi.ts
-│   │   │       │   └── companyMutations.ts
-│   │   │       ├── components
-│   │   │       │   ├── CompanyForm.tsx
-│   │   │       │   ├── companyColumns.tsx
-│   │   │       │   └── companyFormSchema.ts
-│   │   │       ├── hooks
-│   │   │       │   ├── useCompanies.ts
-│   │   │       │   ├── useCompanies2.ts
-│   │   │       │   ├── useCompany.ts
-│   │   │       │   ├── useCreateCompany.ts
-│   │   │       │   └── useDeleteCompany.ts
-│   │   │       ├── index.ts
-│   │   │       ├── pages
-│   │   │       │   └── CompaniesPage.tsx
+│   │   │       │   ├── staffApi.ts
+│   │   │       │   └── staffEntitySearch.ts
 │   │   │       └── types.ts
 │   │   ├── hooks
 │   │   │   ├── useDataTable.ts
@@ -349,6 +402,7 @@
 │   │   │   └── useTable.ts
 │   │   ├── index.css
 │   │   ├── lib
+│   │   │   ├── apiError.ts
 │   │   │   ├── axios.ts
 │   │   │   ├── query-client.ts
 │   │   │   ├── queryKeys.ts
@@ -356,9 +410,10 @@
 │   │   ├── main.tsx
 │   │   ├── routes
 │   │   │   ├── GuestRoute.tsx
-│   │   │   ├── ProtectedRoute.test.tsx
 │   │   │   ├── ProtectedRoute.tsx
 │   │   │   └── RequirePermission.tsx
+│   │   ├── test
+│   │   │   └── setup.ts
 │   │   ├── types
 │   │   │   ├── api.ts
 │   │   │   ├── common.ts
@@ -374,4 +429,4 @@
 ├── project_structure.txt
 └── pytest.ini
 
-63 directories, 312 files
+82 directories, 348 files
