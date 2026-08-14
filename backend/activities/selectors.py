@@ -7,7 +7,7 @@ from .models import Activity
 
 
 def activity_list() -> QuerySet[Activity]:
-    return Activity.objects.select_related(
+    return Activity.objects.filter(deleted_at__isnull=True).select_related(
         "owner",
         "created_by",
         "content_type",
@@ -27,3 +27,11 @@ def activity_object(
         content_type=content_type,
         object_id=object_id,
     )
+
+
+def activity_detail_with_deleted(activity_id) -> Activity:
+    return Activity.objects.select_related(
+        "owner",
+        "created_by",
+        "content_type",
+    ).get(pk=activity_id)

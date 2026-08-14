@@ -74,7 +74,7 @@ class ActivityViewSet(viewsets.ModelViewSet):
 
     def get_queryset(self):
         sel = selectors.activity_list()
-        print("DEBUG: sel ", sel)
+        # print("DEBUG: sel ", sel)
         return sel
 
     def perform_create(self, serializer):
@@ -98,7 +98,7 @@ class ActivityViewSet(viewsets.ModelViewSet):
         methods=["post"],
     )
     def restore(self, request, pk=None):
-        activity = self.get_object()
+        activity = selectors.activity_detail_with_deleted(pk)
 
         services.restore(
             activity=activity,

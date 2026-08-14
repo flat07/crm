@@ -4,6 +4,7 @@ import GuestRoute from "@/routes/GuestRoute";
 import ProtectedRoute from "@/routes/ProtectedRoute";
 import RequirePermission from "@/routes/RequirePermission";
 
+import ActivitiesPage from "@/features/activities/pages/ActivitiesPage";
 import DashboardPage from "@/features/auth/pages/DashboardPage";
 import LoginPage from "@/features/auth/pages/LoginPage";
 import { PERMISSIONS } from "@/features/auth/utils/permissions";
@@ -71,6 +72,14 @@ export const staffRoutes = [
             element: (
               <RequirePermission permission={PERMISSIONS.DEAL_VIEW}>
                 <DealsPage />
+              </RequirePermission>
+            ),
+          },
+          {
+            path: "/activities",
+            element: (
+              <RequirePermission permission={PERMISSIONS.DEAL_VIEW}>
+                <ActivitiesPage />
               </RequirePermission>
             ),
           },

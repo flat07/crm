@@ -99,7 +99,6 @@ class DealSerializer(serializers.ModelSerializer):
     def get_owner_name(self, obj):
         if not obj.owner:
             return None
-
         return obj.owner.get_full_name()
 
     def create(self, validated_data):
