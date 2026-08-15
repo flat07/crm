@@ -23,6 +23,10 @@ urlpatterns = [
         include("activities.urls"),
     ),
     path(
+        "notes/",
+        include("notes.urls"),
+    ),
+    path(
         "attachments/",
         include("attachments.urls"),
     ),
@@ -31,6 +35,7 @@ urlpatterns = [
         include("staff.urls"),
     ),
 ]
+# /api/v1/notes/
 # /api/v1/companies/
 # /api/v1/contacts/
 # /api/v1/staff/

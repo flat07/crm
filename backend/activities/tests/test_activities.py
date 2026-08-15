@@ -1,7 +1,6 @@
 # backend/activities/tests/test_activities.py
 import pytest
 from companies.tests.factories import CompanyFactory
-from django.contrib.contenttypes.models import ContentType
 from rest_framework import status
 
 from activities.models import (
@@ -71,7 +70,7 @@ class TestActivityCreate:
             "status": ActivityStatus.PLANNED,
             "priority": ActivityPriority.HIGH,
             "due_date": "2026-12-31T10:00:00Z",
-            "content_type": ContentType.objects.get_for_model(company).pk,
+            "content_type": "company",
             "object_id": str(company.pk),
         }
 
@@ -80,6 +79,8 @@ class TestActivityCreate:
             payload,
             format="json",
         )
+        print("DEBUG: status =", response.status_code)
+        print("DEBUG: data =", response.data)
 
         assert response.status_code == status.HTTP_201_CREATED
 

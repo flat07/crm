@@ -2,15 +2,15 @@ import pytest
 
 
 @pytest.fixture
-def auth_client_with_company_permissions(
+def auth_client_with_note_permissions(
     api_client,
     user_with_custom_permissions,
 ):
     user = user_with_custom_permissions(
-        "company.view",
-        "company.create",
-        "company.update",
-        "company.delete",
+        "note.view",
+        "note.create",
+        "note.update",
+        "note.delete",
     )
     response = api_client.post(
         "/api/v1/auth/login/",

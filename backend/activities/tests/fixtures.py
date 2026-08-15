@@ -13,7 +13,7 @@ def auth_client_with_activity_permissions(
         "activity.delete",
     )
     response = api_client.post(
-        "/api/v1/staff/auth/login/",
+        "/api/v1/auth/login/",
         {
             "email": user.email,
             "password": "password",

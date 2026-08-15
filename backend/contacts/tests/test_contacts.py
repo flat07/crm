@@ -10,7 +10,7 @@ from contacts.tests.factories import ContactFactory
 pytestmark = pytest.mark.django_db
 
 
-class TestCompanyList:
+class TestContactList:
     endpoint = "/api/v1/contacts/"
 
     def test_returns_contact_list(self, auth_admin):
@@ -22,7 +22,7 @@ class TestCompanyList:
         assert len(response.data["results"]) == 3
 
 
-class TestCompanyRetrieve:
+class TestContactRetrieve:
     endpoint = "/api/v1/contacts/{id}/"
 
     def test_returns_contact_detail(self, auth_admin):
@@ -47,7 +47,7 @@ class TestCompanyRetrieve:
         assert response.status_code == status.HTTP_404_NOT_FOUND
 
 
-class TestCompanyCreate:
+class TestContactCreate:
     endpoint = "/api/v1/contacts/"
 
     def test_creates_contact(
@@ -55,12 +55,13 @@ class TestCompanyCreate:
         auth_admin,
     ):
         company = CompanyFactory()
+
         payload = {
             "first_name": "John",
             "last_name": "Doe",
             "contact_type": ContactType.CUSTOMER,
             "source": ContactSource.WEBSITE,
-            "company": str(company.id),
+            "company_id": str(company.id),
             "city": "San Francisco",
             "country": "United States",
         }
@@ -70,16 +71,24 @@ class TestCompanyCreate:
             payload,
             format="json",
         )
-        # print(response.status_code)
-        # print(response.data)
 
         assert response.status_code == status.HTTP_201_CREATED
 
-        assert Contact.objects.filter(
+        contact = Contact.objects.get(
             first_name="John",
-        ).exists()
+        )
 
-    def test_requires_name(self, auth_admin):
+        assert contact.last_name == "Doe"
+        assert contact.contact_type == ContactType.CUSTOMER
+        assert contact.source == ContactSource.WEBSITE
+        assert contact.company_id == company.id  # type: ignore
+        assert contact.city == "San Francisco"
+        assert contact.country == "United States"
+
+    def test_requires_name(
+        self,
+        auth_admin,
+    ):
         response = auth_admin.post(
             self.endpoint,
             {},
@@ -90,7 +99,7 @@ class TestCompanyCreate:
         assert "first_name" in response.data
 
 
-class TestCompanyUpdate:
+class TestContactUpdate:
     def test_updates_contact(
         self,
         auth_admin,
@@ -114,7 +123,7 @@ class TestCompanyUpdate:
         assert contact.first_name == "New Name"
 
 
-class TestCompanyDelete:
+class TestContactDelete:
     endpoint = "/api/v1/contacts/{id}/"
 
     def test_soft_deletes_contact(

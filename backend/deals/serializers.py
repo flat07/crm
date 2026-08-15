@@ -111,6 +111,7 @@ class DealSerializer(serializers.ModelSerializer):
         instance,
         validated_data,
     ):
+        print("DEBUG DealSerializer validated_data =", validated_data)
         from .services import update_deal
 
         return update_deal(

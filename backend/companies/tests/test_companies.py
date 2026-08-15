@@ -67,6 +67,8 @@ class TestCompanyCreate:
             payload,
             format="json",
         )
+        # print("DEBUG: status =", response.status_code)
+        # print("DEBUG: data =", response.data)
 
         assert response.status_code == status.HTTP_201_CREATED
 

@@ -57,7 +57,7 @@ class TestLeadCreate:
         company = CompanyFactory()
         payload = {
             "title": "Enterprise Software Solutions",
-            "company": str(company.id),
+            "company_id": str(company.id),
             "source": LeadSource.WEBSITE,
             "status": LeadStatus.NEW,
             "estimated_value": "15000.00",  # Maps to estimated_value field

@@ -13,6 +13,7 @@ pytest_plugins = (
     "leads.tests.fixtures",
     "activities.tests.fixtures",
     "attachments.tests.fixtures",
+    "notes.tests.fixtures",
 )
 
 
