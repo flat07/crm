@@ -3,14 +3,8 @@
 from django.contrib.contenttypes.models import ContentType
 from rest_framework import serializers
 
+from .constants import CONTENT_TYPE_MAP
 from .models import Note
-
-CONTENT_TYPE_MAP = {
-    "company": "companies.company",
-    "contact": "contacts.contact",
-    "lead": "leads.lead",
-    "deal": "deals.deal",
-}
 
 
 class NoteListSerializer(serializers.ModelSerializer):

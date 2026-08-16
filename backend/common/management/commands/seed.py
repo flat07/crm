@@ -6,6 +6,7 @@ from common.seeders.companies import seed_companies
 from common.seeders.contacts import seed_contacts
 from common.seeders.deals import seed_deals
 from common.seeders.leads import seed_leads
+from common.seeders.notes import seed_notes
 from common.seeders.staff import seed_staff
 
 
@@ -20,6 +21,7 @@ class Command(BaseCommand):
             seed_leads,
             seed_deals,
             seed_activities,
+            seed_notes,
         ]
 
         for seeder in seeders:

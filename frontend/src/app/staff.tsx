@@ -12,6 +12,7 @@ import CompaniesPage from "@/features/companies/pages/CompaniesPage";
 import ContactsPage from "@/features/contacts/pages/ContactsPage";
 import DealsPage from "@/features/deals/pages/DealsPage";
 import LeadsPage from "@/features/leads/pages/LeadsPage";
+import { NotesPage } from "@/features/notes/pages/NotesPage";
 
 import { StaffLayout } from "@/components/layout/staff/StaffLayout";
 
@@ -80,6 +81,14 @@ export const staffRoutes = [
             element: (
               <RequirePermission permission={PERMISSIONS.DEAL_VIEW}>
                 <ActivitiesPage />
+              </RequirePermission>
+            ),
+          },
+          {
+            path: "/notes",
+            element: (
+              <RequirePermission permission={PERMISSIONS.DEAL_VIEW}>
+                <NotesPage />
               </RequirePermission>
             ),
           },

@@ -1,3 +1,4 @@
+# backend/common/seeders/activities.py
 from datetime import timedelta
 
 from activities.models import Activity

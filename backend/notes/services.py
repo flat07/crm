@@ -3,14 +3,8 @@
 from django.contrib.contenttypes.models import ContentType
 from django.db import transaction
 
+from .constants import CONTENT_TYPE_MAP
 from .models import Note
-
-CONTENT_TYPE_MAP = {
-    "company": "companies.company",
-    "contact": "contacts.contact",
-    "lead": "leads.lead",
-    "deal": "deals.deal",
-}
 
 
 @transaction.atomic
@@ -45,12 +39,13 @@ def create_note(
 @transaction.atomic
 def update_note(
     *,
-    note,
+    note: Note,
     title=None,
     content=None,
     is_pinned=None,
     is_private=None,
-    content_object=None,
+    content_type=None,
+    object_id=None,
 ) -> Note:
 
     if title is not None:
@@ -65,11 +60,17 @@ def update_note(
     if is_private is not None:
         note.is_private = is_private
 
-    if content_object is not None:
-        note.content_type = ContentType.objects.get_for_model(
-            content_object,
+    # Update related object if supplied
+    if content_type is not None:
+        app_label, model = CONTENT_TYPE_MAP[content_type].split(".")
+
+        note.content_type = ContentType.objects.get(
+            app_label=app_label,
+            model=model,
         )
-        note.object_id = content_object.pk
+
+    if object_id is not None:
+        note.object_id = object_id
 
     note.save()
 

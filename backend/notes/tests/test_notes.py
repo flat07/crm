@@ -2,6 +2,7 @@
 
 import pytest
 from companies.tests.factories import CompanyFactory
+from django.contrib.contenttypes.models import ContentType
 from rest_framework import status
 
 from notes.models import Note
@@ -129,7 +130,7 @@ class TestNoteCreate:
 
 
 class TestNoteUpdate:
-    endpoint = "/api/v1/notes/{id}/"
+    endpoint = "/api/v1/notes/"
 
     def test_updates_note(
         self,
@@ -138,7 +139,7 @@ class TestNoteUpdate:
         note = NoteFactory()
 
         response = auth_admin.patch(
-            self.endpoint.format(id=note.id),
+            f"{self.endpoint}{note.id}/",
             {
                 "title": "Follow-up",
                 "content": "Send proposal tomorrow.",
@@ -152,6 +153,61 @@ class TestNoteUpdate:
 
         assert note.title == "Follow-up"
         assert note.content == "Send proposal tomorrow."
+
+    def test_updates_note_content(
+        self,
+        auth_admin,
+    ):
+        note = NoteFactory(
+            title="Old title",
+            content="Old content",
+        )
+
+        response = auth_admin.patch(
+            f"{self.endpoint}{note.id}/",
+            {
+                "title": "Updated title",
+                "content": "Updated content",
+            },
+            format="json",
+        )
+
+        assert response.status_code == status.HTTP_200_OK
+
+        note.refresh_from_db()
+
+        assert note.title == "Updated title"
+        assert note.content == "Updated content"
+
+    def test_updates_related_object(
+        self,
+        auth_admin,
+    ):
+        company1 = CompanyFactory()
+        company2 = CompanyFactory()
+
+        note = NoteFactory(
+            content_type=ContentType.objects.get_for_model(company1),
+            object_id=company1.id,
+        )
+
+        response = auth_admin.patch(
+            f"{self.endpoint}{note.id}/",
+            {
+                "content_type": "company",
+                "object_id": str(company2.id),
+            },
+            format="json",
+        )
+
+        assert response.status_code == status.HTTP_200_OK
+
+        note.refresh_from_db()
+
+        assert note.content_type == ContentType.objects.get_for_model(
+            company2,
+        )
+        assert note.object_id == company2.id
 
 
 class TestNoteDelete:

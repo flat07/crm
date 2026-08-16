@@ -33,6 +33,9 @@ export default function DashboardPage() {
             <Button variant="outline" onClick={() => navigate("/activities")}>
               Go to Activities
             </Button>
+            <Button variant="outline" onClick={() => navigate("/notes")}>
+              Go to Notes
+            </Button>
           </div>
         </div>
       </PageContent>

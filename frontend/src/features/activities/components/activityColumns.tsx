@@ -1,3 +1,4 @@
+// frontend/src/features/activities/components/activityColumns.tsx
 import { column } from "@/components/shared/DataGrid";
 
 import type { Activity } from "../types";
