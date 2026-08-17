@@ -2,11 +2,10 @@
 
 import { useQuery } from "@tanstack/react-query";
 
-import { GridQueryParams } from "@/components/shared/DataGrid";
-
 import { getActivities } from "../api/activitiesApi";
+import type { ActivityQueryParams } from "../types";
 
-export function useActivities(params: GridQueryParams) {
+export function useActivities(params: ActivityQueryParams) {
   return useQuery({
     queryKey: ["activities", params],
     queryFn: () => getActivities(params),

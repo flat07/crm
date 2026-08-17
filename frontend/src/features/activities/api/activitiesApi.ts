@@ -1,15 +1,13 @@
 // frontend/src/features/activities/api/activitiesApi.ts
 import { api } from "@/lib/axios";
 
-import { GridQueryParams } from "@/components/shared/DataGrid";
 import type { PaginatedResponse } from "@/types/pagination";
-import type { Activity, ActivityFormData } from "../types";
-
+import type { Activity, ActivityFormData, ActivityQueryParams } from "../types";
 /**
  * Get activities
  */
 export async function getActivities(
-  params: GridQueryParams,
+  params: ActivityQueryParams,
 ): Promise<PaginatedResponse<Activity>> {
   const { data } = await api.get<PaginatedResponse<Activity>>("/activities/", {
     params,

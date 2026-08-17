@@ -35,6 +35,14 @@ class ActivityFilter(filters.FilterSet):
         field_name="completed_at",
         lookup_expr="lte",
     )
+    content_type = filters.CharFilter(
+        field_name="content_type__model",
+        lookup_expr="iexact",
+    )
+
+    object_id = filters.UUIDFilter(
+        field_name="object_id",
+    )
 
     class Meta:
         model = Activity

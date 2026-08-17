@@ -11,3 +11,5 @@ router.register(
 )
 
 urlpatterns = router.urls
+
+# /api/v1/companies/

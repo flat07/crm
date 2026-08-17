@@ -30,11 +30,11 @@ export interface Company extends BaseModel {
 
   postal_code: string;
 
-  owner: number | null;
+  owner: string | null;
 
   owner_name?: string;
 
-  created_by: number | null;
+  created_by: string | null;
 
   created_by_name?: string;
 

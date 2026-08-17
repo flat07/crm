@@ -1,3 +1,20 @@
+// frontend/src/features/activities/types.ts
+
+export interface ActivityQueryParams {
+  page?: number;
+  page_size?: number;
+  search?: string;
+  ordering?: string;
+  activity_type?: string;
+  status?: string;
+  priority?: string;
+  owner?: string;
+  created_by?: string;
+  content_type?: string;
+  object_id?: string;
+  is_active?: boolean;
+}
+
 export interface Activity {
   id: string;
 
@@ -44,7 +61,7 @@ export interface ActivityFormData {
 
   owner_id?: string | null;
 
-  content_type: string;
+  content_type: "company" | "contact" | "lead" | "deal";
   object_id: string;
 }
 

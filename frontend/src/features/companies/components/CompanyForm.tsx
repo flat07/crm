@@ -3,6 +3,8 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useEffect } from "react";
 import { useForm } from "react-hook-form";
 import type { Company } from "../types";
+import { CompanyActivities } from "./CompanyActivities";
+import { CompanyNotes } from "./CompanyNotes";
 import {
   companyFormSchema,
   companySizeOptions,
@@ -319,6 +321,11 @@ export function CompanyForm({
           placeholder="Notes about the company..."
         />
       </section>
+      {/* Activities */}
+      {company && <CompanyActivities companyId={String(company.id)} />}
+
+      {/* Notes */}
+      {company && <CompanyNotes companyId={String(company.id)} />}
 
       {/* Status */}
       <label className="flex items-center gap-2">

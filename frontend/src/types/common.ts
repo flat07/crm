@@ -1,3 +1,4 @@
+// frontend/src/types/common.ts
 export interface BaseModel {
   id: number;
 
