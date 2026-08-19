@@ -1,3 +1,5 @@
+// frontend/src/features/contacts/components/ContactNotes.tsx
+
 import { useState } from "react";
 
 import { Button } from "@/components/ui/button";
@@ -5,16 +7,16 @@ import { Button } from "@/components/ui/button";
 import { useNotes } from "@/features/notes/hooks/useNotes";
 import { RelatedNoteForm } from "../../notes/components/RelatedNoteForm";
 
-interface CompanyNotesProps {
-  companyId: string;
+interface ContactNotesProps {
+  contactId: string;
 }
 
-export function CompanyNotes({ companyId }: CompanyNotesProps) {
+export function ContactNotes({ contactId }: ContactNotesProps) {
   const [showForm, setShowForm] = useState(false);
 
   const { data, isLoading, isError } = useNotes({
-    content_type: "company",
-    object_id: companyId,
+    content_type: "contact",
+    object_id: contactId,
   });
 
   if (isLoading) {
@@ -47,7 +49,7 @@ export function CompanyNotes({ companyId }: CompanyNotesProps) {
           <h3 className="text-sm font-semibold">Notes</h3>
 
           <p className="text-sm text-muted-foreground">
-            Notes and important information about this company.
+            Notes and important information about this contact.
           </p>
         </div>
 
@@ -64,8 +66,8 @@ export function CompanyNotes({ companyId }: CompanyNotesProps) {
       {showForm && (
         <div className="rounded-lg border p-4">
           <RelatedNoteForm
-            contentType="company"
-            objectId={companyId}
+            contentType="contact"
+            objectId={contactId}
             onSuccess={() => {
               setShowForm(false);
             }}

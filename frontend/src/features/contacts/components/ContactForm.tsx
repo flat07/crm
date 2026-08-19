@@ -8,6 +8,8 @@ import { entityOption } from "@/components/shared/DataGrid/form/entityOption";
 
 import { searchCompanies } from "@/features/companies/api/companyEntitySearch";
 import { searchStaff } from "@/features/staff/api/staffEntitySearch";
+import { ContactActivities } from "./ContactActivities";
+import { ContactNotes } from "./ContactNotes";
 
 import type { Contact } from "../types";
 
@@ -479,6 +481,12 @@ export function ContactForm({
           <p className="text-sm text-destructive">{errors.notes.message}</p>
         )}
       </section>
+
+      {/* Activities */}
+      {contact && <ContactActivities contactId={String(contact.id)} />}
+
+      {/* Notes */}
+      {contact && <ContactNotes contactId={String(contact.id)} />}
 
       {/* ------------------------------------------------------------------ */}
       {/* Actions */}

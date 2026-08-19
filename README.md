@@ -102,7 +102,7 @@ crm/
 ## Clone the repository
 
 ```bash
-git clone https://github.com/yourusername/crm.git
+git clone https://github.com/flat07/crm.git
 cd crm
 ```
 
