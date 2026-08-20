@@ -33,7 +33,7 @@ export async function createActivity(
   values: ActivityFormData,
 ): Promise<Activity> {
   const { data } = await api.post<Activity>("/activities/", values);
-
+  console.log("DEBUG: createActivity: data ", data);
   return data;
 }
 

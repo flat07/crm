@@ -58,6 +58,7 @@ export function RelatedActivityForm({
   async function handleFormSubmit(values: RelatedActivityFormValues) {
     const payload: ActivityFormData = {
       ...values,
+      due_date: values.due_date || undefined,
       content_type: contentType,
       object_id: objectId,
     };

@@ -10,6 +10,8 @@ import { entityOption } from "@/components/shared/DataGrid/form/entityOption";
 import { searchCompanies } from "@/features/companies/api/companyEntitySearch";
 import { searchContacts } from "@/features/contacts/api/contactEntitySearch";
 import { searchStaff } from "@/features/staff/api/staffEntitySearch";
+import { LeadActivities } from "./LeadActivities";
+import { LeadNotes } from "./LeadNotes";
 
 import type { Lead } from "../types";
 
@@ -366,6 +368,12 @@ export function LeadForm({ lead, onSubmit, readOnly = false }: LeadFormProps) {
           </p>
         )}
       </section>
+
+      {/* Activities */}
+      {lead && <LeadActivities leadId={String(lead.id)} />}
+
+      {/* Notes */}
+      {lead && <LeadNotes leadId={String(lead.id)} />}
 
       {/* Status */}
       <label className="flex items-center gap-2">

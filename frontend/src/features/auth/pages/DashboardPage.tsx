@@ -5,6 +5,7 @@ import { Button } from "@/components/ui/button";
 import { PageContent } from "@/components/layout/staff/PageContent";
 import { PageHeader } from "@/components/layout/staff/PageHeader";
 import { useAuth } from "@/contexts/AuthContext";
+import { LeadPipeline } from "@/features/leads/components/LeadPipeline";
 import { useNavigate } from "react-router-dom";
 
 export default function DashboardPage() {
@@ -36,6 +37,7 @@ export default function DashboardPage() {
             <Button variant="outline" onClick={() => navigate("/notes")}>
               Go to Notes
             </Button>
+            <LeadPipeline />
           </div>
         </div>
       </PageContent>

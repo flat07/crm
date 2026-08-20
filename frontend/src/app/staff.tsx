@@ -11,6 +11,7 @@ import { PERMISSIONS } from "@/features/auth/utils/permissions";
 import CompaniesPage from "@/features/companies/pages/CompaniesPage";
 import ContactsPage from "@/features/contacts/pages/ContactsPage";
 import DealsPage from "@/features/deals/pages/DealsPage";
+import { LeadDetailPage } from "@/features/leads/pages/LeadDetailPage";
 import LeadsPage from "@/features/leads/pages/LeadsPage";
 import { NotesPage } from "@/features/notes/pages/NotesPage";
 
@@ -62,8 +63,16 @@ export const staffRoutes = [
           {
             path: "/leads",
             element: (
-              <RequirePermission permission={PERMISSIONS.CONTACT_VIEW}>
+              <RequirePermission permission={PERMISSIONS.LEAD_VIEW}>
                 <LeadsPage />
+              </RequirePermission>
+            ),
+          },
+          {
+            path: "/leads/:id",
+            element: (
+              <RequirePermission permission={PERMISSIONS.LEAD_VIEW}>
+                <LeadDetailPage />
               </RequirePermission>
             ),
           },
@@ -79,7 +88,7 @@ export const staffRoutes = [
           {
             path: "/activities",
             element: (
-              <RequirePermission permission={PERMISSIONS.DEAL_VIEW}>
+              <RequirePermission permission={PERMISSIONS.ACTIVITY_VIEW}>
                 <ActivitiesPage />
               </RequirePermission>
             ),
@@ -87,7 +96,7 @@ export const staffRoutes = [
           {
             path: "/notes",
             element: (
-              <RequirePermission permission={PERMISSIONS.DEAL_VIEW}>
+              <RequirePermission permission={PERMISSIONS.NOTE_VIEW}>
                 <NotesPage />
               </RequirePermission>
             ),

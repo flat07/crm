@@ -26,7 +26,7 @@ export function useUpdateLead() {
         queryKey: ["leads", updatedLead.id],
       });
 
-      toast.success("Lead updated successfully.");
+      // toast.success("Lead updated successfully.");
     },
 
     onError: (error) => {

@@ -11,6 +11,8 @@ import { searchCompanies } from "@/features/companies/api/companyEntitySearch";
 import { searchContacts } from "@/features/contacts/api/contactEntitySearch";
 import { searchLeads } from "@/features/leads/api/leadEntitySearch";
 import { searchStaff } from "@/features/staff/api/staffEntitySearch";
+import { DealActivities } from "./DealActivities";
+import { DealNotes } from "./DealNotes";
 
 import type { Deal } from "../types";
 
@@ -388,6 +390,12 @@ export function DealForm({ deal, onSubmit, readOnly = false }: DealFormProps) {
           </p>
         )}
       </section>
+
+      {/* Activities */}
+      {deal && <DealActivities dealId={String(deal.id)} />}
+
+      {/* Notes */}
+      {deal && <DealNotes dealId={String(deal.id)} />}
 
       {/* Status */}
       <label className="flex items-center gap-2">

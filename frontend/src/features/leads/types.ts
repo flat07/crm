@@ -1,7 +1,6 @@
 // frontend/src/features/leads/types/index.ts
 
-export type LeadStatus =
-  "new" | "contacted" | "qualified" | "unqualified" | "converted" | "archived";
+export type LeadStatus = "new" | "contacted" | "qualified" | "won";
 
 export type LeadSource =
   | "website"

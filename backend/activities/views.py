@@ -77,6 +77,41 @@ class ActivityViewSet(viewsets.ModelViewSet):
         # print("DEBUG: sel ", sel)
         return sel
 
+    # def create(self, request, *args, **kwargs):
+    #     print("\n" + "=" * 80)
+    #     print("DEBUG ACTIVITY CREATE")
+    #     print("request.data:")
+    #     print(request.data)
+    #     print("=" * 80)
+
+    #     serializer = self.get_serializer(data=request.data)
+
+    #     print("serializer.is_valid():", serializer.is_valid())
+
+    #     if not serializer.is_valid():
+    #         print("\n!!! SERIALIZER ERRORS !!!")
+    #         print(serializer.errors)
+    #         print("=" * 80 + "\n")
+
+    #         return response.Response(
+    #             serializer.errors,
+    #             status=status.HTTP_400_BAD_REQUEST,
+    #         )
+
+    #     print("\nvalidated_data:")
+    #     print(serializer.validated_data)
+    #     print("=" * 80 + "\n")
+
+    #     self.perform_create(serializer)
+
+    #     headers = self.get_success_headers(serializer.data)
+
+    #     return response.Response(
+    #         serializer.data,
+    #         status=status.HTTP_201_CREATED,
+    #         headers=headers,
+    #     )
+
     def perform_create(self, serializer):
         serializer.instance = services.create_activity(
             **serializer.validated_data,
